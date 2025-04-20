@@ -38,17 +38,60 @@ using namespace gregorian;
 namespace business_day_convention
 {
 
-	TEST(business_day_convention, assign)
+	TEST(business_day_convention, make_business_day1)
 	{
+		const auto& cal = make_calendar_england();
+		const auto d = 2023y / January / 1d;
+
 		auto bdc = business_day_convention{};
 
-		bdc = no_adjustment{};
-		bdc = following{};
-		bdc = modified_following{};
-		bdc = preceding{};
-		bdc = modified_preceding{};
+		const auto na = no_adjustment{};
+		bdc = na;
+		EXPECT_EQ(na.adjust(d, cal), make_business_day(d, bdc, cal));
 
-		// what are we actually checking?
+		const auto f = following{};
+		bdc = f;
+		EXPECT_EQ(f.adjust(d, cal), make_business_day(d, bdc, cal));
+
+		const auto mf = modified_following{};
+		bdc = mf;
+		EXPECT_EQ(mf.adjust(d, cal), make_business_day(d, bdc, cal));
+
+		const auto p = preceding{};
+		bdc = p;
+		EXPECT_EQ(p.adjust(d, cal), make_business_day(d, bdc, cal));
+
+		const auto mp = modified_preceding{};
+		bdc = mp;
+		EXPECT_EQ(mp.adjust(d, cal), make_business_day(d, bdc, cal));
+	}
+
+	TEST(business_day_convention, make_business_day2)
+	{
+		const auto& cal = make_calendar_england();
+		const auto d = sys_days{ 2023y / January / 1d };
+
+		auto bdc = business_day_convention{};
+
+		const auto na = no_adjustment{};
+		bdc = na;
+		EXPECT_EQ(na.adjust(d, cal), make_business_day(d, bdc, cal));
+
+		const auto f = following{};
+		bdc = f;
+		EXPECT_EQ(f.adjust(d, cal), make_business_day(d, bdc, cal));
+
+		const auto mf = modified_following{};
+		bdc = mf;
+		EXPECT_EQ(mf.adjust(d, cal), make_business_day(d, bdc, cal));
+
+		const auto p = preceding{};
+		bdc = p;
+		EXPECT_EQ(p.adjust(d, cal), make_business_day(d, bdc, cal));
+
+		const auto mp = modified_preceding{};
+		bdc = mp;
+		EXPECT_EQ(mp.adjust(d, cal), make_business_day(d, bdc, cal));
 	}
 
 }

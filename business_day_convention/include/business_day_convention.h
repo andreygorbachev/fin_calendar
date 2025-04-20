@@ -45,4 +45,33 @@ namespace business_day_convention
 		modified_preceding
 	>;
 
+
+	inline auto make_business_day(
+		const std::chrono::year_month_day& ymd,
+		const business_day_convention& bdc,
+		const gregorian::calendar& cal
+	)
+	{
+		return std::visit(
+			[&](const auto& bdc) {
+				return bdc.adjust(ymd, cal);
+			},
+			bdc
+		);
+	}
+
+	inline auto make_business_day(
+		const std::chrono::sys_days& sd,
+		const business_day_convention& bdc,
+		const gregorian::calendar& cal
+	)
+	{
+		return std::visit(
+			[&](const auto& bdc) {
+				return bdc.adjust(sd, cal);
+			},
+			bdc
+		);
+	}
+
 }
