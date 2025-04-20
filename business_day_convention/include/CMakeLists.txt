@@ -6,6 +6,7 @@ add_library(${PROJECT_NAME} INTERFACE
   preceding.h
   modified_following.h
   modified_preceding.h
+  business_day_convention.h
 )
 
 target_include_directories(${PROJECT_NAME} INTERFACE .)

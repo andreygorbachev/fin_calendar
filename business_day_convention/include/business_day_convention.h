@@ -23,47 +23,26 @@
 #pragma once
 
 #include <chrono>
+#include <variant>
 
 #include <calendar.h>
-#include <business_day_adjusters.h>
+
+#include "no_adjustment.h"
+#include "following.h"
+#include "modified_following.h"
+#include "preceding.h"
+#include "modified_preceding.h"
 
 
 namespace business_day_convention
 {
 
-	class preceding
-	{
-
-	public:
-
-		auto adjust(
-			const std::chrono::year_month_day& ymd,
-			const gregorian::calendar& cal
-		) const->std::chrono::year_month_day;
-
-		auto adjust(
-			const std::chrono::sys_days& sd,
-			const gregorian::calendar& cal
-		) const->std::chrono::sys_days;
-
-	};
-
-
-
-	inline auto preceding::adjust(
-		const std::chrono::year_month_day& ymd,
-		const gregorian::calendar& cal
-	) const -> std::chrono::year_month_day
-	{
-		return gregorian::Preceding.adjust(ymd, cal);
-	}
-
-	inline auto preceding::adjust(
-		const std::chrono::sys_days& sd,
-		const gregorian::calendar& cal
-	) const -> std::chrono::sys_days
-	{
-		return gregorian::Preceding.adjust(sd, cal);
-	}
+	using business_day_convention = std::variant<
+		no_adjustment,
+		following,
+		modified_following,
+		preceding,
+		modified_preceding
+	>;
 
 }

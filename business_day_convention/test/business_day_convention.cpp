@@ -20,50 +20,35 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#pragma once
+#include <business_day_convention.h>
+
+#include <gtest/gtest.h>
 
 #include <chrono>
+#include <exception>
+#include <memory>
 
-#include <calendar.h>
-#include <business_day_adjusters.h>
+#include "setup.h"
+
+using namespace std;
+using namespace std::chrono;
+using namespace gregorian;
 
 
 namespace business_day_convention
 {
 
-	class preceding
+	TEST(business_day_convention, assign)
 	{
+		auto bdc = business_day_convention{};
 
-	public:
+		bdc = no_adjustment{};
+		bdc = following{};
+		bdc = modified_following{};
+		bdc = preceding{};
+		bdc = modified_preceding{};
 
-		auto adjust(
-			const std::chrono::year_month_day& ymd,
-			const gregorian::calendar& cal
-		) const->std::chrono::year_month_day;
-
-		auto adjust(
-			const std::chrono::sys_days& sd,
-			const gregorian::calendar& cal
-		) const->std::chrono::sys_days;
-
-	};
-
-
-
-	inline auto preceding::adjust(
-		const std::chrono::year_month_day& ymd,
-		const gregorian::calendar& cal
-	) const -> std::chrono::year_month_day
-	{
-		return gregorian::Preceding.adjust(ymd, cal);
-	}
-
-	inline auto preceding::adjust(
-		const std::chrono::sys_days& sd,
-		const gregorian::calendar& cal
-	) const -> std::chrono::sys_days
-	{
-		return gregorian::Preceding.adjust(sd, cal);
+		// what are we actually checking?
 	}
 
 }

@@ -14,6 +14,7 @@ add_executable(${PROJECT_NAME}
   preceding.cpp
   modified_following.cpp
   modified_preceding.cpp
+  business_day_convention.cpp
   setup.h
 )
 
