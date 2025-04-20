@@ -53,7 +53,8 @@ namespace business_day_convention
 	)
 	{
 		return std::visit(
-			[&](const auto& bdc) {
+			[&](const auto& bdc)
+			{
 				return bdc.adjust(ymd, cal);
 			},
 			bdc
@@ -67,7 +68,8 @@ namespace business_day_convention
 	)
 	{
 		return std::visit(
-			[&](const auto& bdc) {
+			[&](const auto& bdc)
+			{
 				return bdc.adjust(sd, cal);
 			},
 			bdc
