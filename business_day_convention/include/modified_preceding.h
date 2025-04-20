@@ -55,7 +55,18 @@ namespace business_day_convention
 		const gregorian::calendar& cal
 	) const -> std::chrono::year_month_day
 	{
-		return gregorian::ModifiedPreceding.adjust(ymd, cal);
+		auto result = ymd;
+		while (!cal.is_business_day(result))
+		{
+			if (result.day() == std::chrono::day{ 1 })
+			{
+				// don't want to move to a different month
+				return gregorian::Following.adjust(ymd, cal);
+			}
+
+			result = std::chrono::sys_days{ result } - std::chrono::days{ 1 };
+		}
+		return result;
 	}
 
 	inline auto modified_preceding::adjust(
@@ -63,7 +74,7 @@ namespace business_day_convention
 		const gregorian::calendar& cal
 	) const -> std::chrono::sys_days
 	{
-		return gregorian::ModifiedPreceding.adjust(sd, cal);
+		return std::chrono::sys_days{ adjust(std::chrono::year_month_day{ sd }, cal) };
 	}
 
 }
