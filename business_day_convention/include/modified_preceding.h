@@ -31,6 +31,7 @@
 namespace business_day_convention
 {
 
+	// EuroSTR documentation calls this "the European modified previous business day convention"
 	class modified_preceding
 	{
 
