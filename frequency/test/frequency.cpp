@@ -20,43 +20,22 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <no_adjustment.h>
+#include <frequency.h>
 
 #include <gtest/gtest.h>
 
 #include <chrono>
-#include <exception>
-
-#include "setup.h"
 
 using namespace std;
 using namespace std::chrono;
-using namespace gregorian;
 
 
-namespace business_day_convention
+namespace frequency
 {
 
-	TEST(no_adjustment, adjust1)
+	TEST(frequency, test1)
 	{
-		const auto bdc = no_adjustment{};
-
-		const auto& c = make_calendar_england();
-
-		const auto d = 2023y / January / 1d;
-
-		EXPECT_EQ(d, bdc.adjust(d, c));
-	}
-
-	TEST(no_adjustment, adjust2)
-	{
-		const auto bdc = no_adjustment{};
-
-		const auto& c = make_calendar_england();
-
-		const auto d = sys_days{ 2023y / January / 1d };
-
-		EXPECT_EQ(d, bdc.adjust(d, c));
+		EXPECT_EQ(true, true);
 	}
 
 }
