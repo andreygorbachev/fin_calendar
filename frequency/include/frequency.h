@@ -30,7 +30,7 @@ namespace frequency
 {
 
 	using frequency = std::variant<
-		std::chrono::months // could be poisitve of negative in this setup
+		std::chrono::months // could be positve of negative in this setup
 	>;
 
 	constexpr auto SemiAnnual = frequency{ std::chrono::months{ 6 } };
@@ -38,6 +38,9 @@ namespace frequency
 
     template<typename... Ts>
     struct overloaded : Ts... { using Ts::operator()...; };
+
+    template<typename... Ts>
+    overloaded(Ts...) -> overloaded<Ts...>;
 
     inline auto advance(std::chrono::year_month_day ymd, const frequency& f) -> std::chrono::year_month_day
     {
