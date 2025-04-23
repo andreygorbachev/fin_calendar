@@ -30,6 +30,29 @@ namespace frequency
 {
 
 	using frequency = std::variant<
+		std::chrono::months // could be poisitve of negative in this setup
 	>;
+
+	constexpr auto SemiAnnual = frequency{ std::chrono::months{ 6 } };
+
+
+    template<typename... Ts>
+    struct overloaded : Ts... { using Ts::operator()...; };
+
+    inline auto advance(std::chrono::year_month_day ymd, const frequency& f) -> std::chrono::year_month_day
+    {
+        std::visit(
+            overloaded{
+                [&ymd](const std::chrono::months& ms) { ymd += ms; }
+            },
+            f
+        );
+
+        if(ymd.ok())
+            return ymd;
+        else
+            // to fix the bad date we snap to the last day of the month
+            return ymd.year() / ymd.month() / std::chrono::last;
+    }
 
 }

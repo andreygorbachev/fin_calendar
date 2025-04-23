@@ -33,9 +33,12 @@ using namespace std::chrono;
 namespace frequency
 {
 
-	TEST(frequency, test1)
+	TEST(frequency, SemiAnnual1)
 	{
-		EXPECT_EQ(true, true);
+		EXPECT_EQ(2024y / August / 29d, advance(2024y / February / 29d, SemiAnnual));
+
+		EXPECT_EQ(2024y / February / 29d, advance(2023y / August / 29d, SemiAnnual));
+		EXPECT_EQ(2025y / February / 28d, advance(2024y / August / 29d, SemiAnnual));
 	}
 
 }
