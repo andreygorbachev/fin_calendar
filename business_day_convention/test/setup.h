@@ -22,6 +22,8 @@
 
 #pragma once
 
+#include <memory>
+
 #include <schedule.h>
 #include <annual_holidays.h>
 #include <calendar.h>
@@ -159,7 +161,6 @@ namespace business_day_convention
 
 	inline auto _make_calendar_starts_ends_with_holidays() -> gregorian::calendar
 	{
-		using namespace std;
 		using namespace std::chrono;
 		using namespace gregorian;
 
@@ -167,8 +168,8 @@ namespace business_day_convention
 			2024y / FirstDayOfJanuary,
 			2024y / LastDayOfDecember,
 		};
-		auto s = schedule{ days_period{ 2024y / FirstDayOfJanuary, 2024y / LastDayOfDecember }, move(hols) };
-		return calendar{ NoWeekend, move(s) };
+		auto s = schedule{ days_period{ 2024y / FirstDayOfJanuary, 2024y / LastDayOfDecember }, std::move(hols) };
+		return calendar{ NoWeekend, std::move(s) };
 	}
 
 	inline auto make_calendar_starts_ends_with_holidays() -> const gregorian::calendar&
@@ -179,7 +180,6 @@ namespace business_day_convention
 
 	inline auto _make_calendar_all_holidays() -> gregorian::calendar
 	{
-		using namespace std;
 		using namespace std::chrono;
 		using namespace gregorian;
 

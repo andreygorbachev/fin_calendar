@@ -20,43 +20,42 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <no_adjustment.h>
-
-#include <gtest/gtest.h>
+#pragma once
 
 #include <chrono>
-#include <exception>
-
-#include "setup.h"
-
-using namespace std;
-using namespace std::chrono;
-using namespace gregorian;
+#include <variant>
 
 
-namespace business_day_convention
+namespace frequency
 {
 
-	TEST(no_adjustment, adjust1)
-	{
-		const auto bdc = no_adjustment{};
+	using frequency = std::variant<
+		std::chrono::months // could be positve of negative in this setup
+	>;
 
-		const auto& c = make_calendar_england();
+	constexpr auto SemiAnnual = frequency{ std::chrono::months{ 6 } };
 
-		const auto d = 2023y / January / 1d;
 
-		EXPECT_EQ(d, bdc.adjust(d, c));
-	}
+    template<typename... Ts>
+    struct overloaded : Ts... { using Ts::operator()...; };
 
-	TEST(no_adjustment, adjust2)
-	{
-		const auto bdc = no_adjustment{};
+    template<typename... Ts>
+    overloaded(Ts...) -> overloaded<Ts...>;
 
-		const auto& c = make_calendar_england();
+    inline auto advance(std::chrono::year_month_day ymd, const frequency& f) -> std::chrono::year_month_day
+    {
+        std::visit(
+            overloaded{
+                [&ymd](const std::chrono::months& ms) { ymd += ms; }
+            },
+            f
+        );
 
-		const auto d = sys_days{ 2023y / January / 1d };
-
-		EXPECT_EQ(d, bdc.adjust(d, c));
-	}
+        if(ymd.ok())
+            return ymd;
+        else
+            // to fix the bad date we snap to the last day of the month
+            return ymd.year() / ymd.month() / std::chrono::last;
+    }
 
 }
