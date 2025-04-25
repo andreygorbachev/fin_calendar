@@ -19,6 +19,7 @@ FetchContent_MakeAvailable(calendar)
 
 add_subdirectory(business_day_convention)
 add_subdirectory(frequency)
+add_subdirectory(quasi_coupon_dates)
 
 #set(CMAKE_EXPORT_PACKAGE_REGISTRY ON)
 #export(PACKAGE FinCalendar)
