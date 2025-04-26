@@ -33,8 +33,18 @@ using namespace std::chrono;
 namespace day_count
 {
 
-	TEST(day_count, Test1)
+	TEST(day_count, fraction1)
 	{
+		auto dc = day_count{};
+
+		const auto _1_1 = one_1{};
+		dc = _1_1;
+
+		const auto a_360 = actual_360{};
+		dc = a_360;
+
+		const auto a_365f = actual_365_fixed{};
+		dc = a_365f;
 	}
 
 }
