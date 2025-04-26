@@ -39,12 +39,12 @@ namespace business_day_convention
 		auto adjust(
 			const std::chrono::year_month_day& ymd,
 			const gregorian::calendar& cal
-		) const->std::chrono::year_month_day;
+		) const -> std::chrono::year_month_day;
 
 		auto adjust(
 			const std::chrono::sys_days& sd,
 			const gregorian::calendar& cal
-		) const->std::chrono::sys_days;
+		) const -> std::chrono::sys_days;
 
 	};
 

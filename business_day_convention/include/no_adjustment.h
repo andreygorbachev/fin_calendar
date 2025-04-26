@@ -39,12 +39,12 @@ namespace business_day_convention
 		auto adjust(
 			const std::chrono::year_month_day& ymd,
 			const gregorian::calendar& cal
-		) const->std::chrono::year_month_day;
+		) const /*noexcept*/ -> std::chrono::year_month_day;
 
 		auto adjust(
 			const std::chrono::sys_days& sd,
 			const gregorian::calendar& cal
-		) const->std::chrono::sys_days;
+		) const /*noexcept*/ -> std::chrono::sys_days;
 
 	};
 
@@ -53,7 +53,7 @@ namespace business_day_convention
 	inline auto no_adjustment::adjust(
 		const std::chrono::year_month_day& ymd,
 		const gregorian::calendar& cal
-	) const -> std::chrono::year_month_day
+	) const /*noexcept*/ -> std::chrono::year_month_day
 	{
 		return gregorian::NoAdjustment.adjust(ymd, cal);
 	}
@@ -61,7 +61,7 @@ namespace business_day_convention
 	inline auto no_adjustment::adjust(
 		const std::chrono::sys_days& sd,
 		const gregorian::calendar& cal
-	) const -> std::chrono::sys_days
+	) const /*noexcept*/ -> std::chrono::sys_days
 	{
 		return gregorian::NoAdjustment.adjust(sd, cal);
 	}

@@ -35,14 +35,16 @@ namespace day_count
 
 		auto fraction(
 			const std::chrono::year_month_day& start,
-			const std::chrono::year_month_day& end) const;
+			const std::chrono::year_month_day& end
+		) const -> double;
 
 	};
 
 
 	inline auto actual_360::fraction(
 		const std::chrono::year_month_day& start,
-		const std::chrono::year_month_day& end) const
+		const std::chrono::year_month_day& end
+	) const -> double
 	{
 		const auto start_date = std::chrono::sys_days(start);
 		const auto end_date = std::chrono::sys_days(end);
