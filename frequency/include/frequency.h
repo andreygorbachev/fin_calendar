@@ -51,7 +51,7 @@ namespace frequency
             f
         );
 
-        if(ymd.ok())
+        if(ymd.ok()) // could be that this is wrong place to fix dates
             return ymd;
         else
             // to fix the bad date we snap to the last day of the month
