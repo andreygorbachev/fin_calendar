@@ -23,7 +23,6 @@
 #pragma once
 
 #include <chrono>
-#include <variant>
 
 
 namespace day_count
@@ -32,6 +31,20 @@ namespace day_count
 	class one_1
 	{
 
+	public:
+
+		auto fraction(
+			const std::chrono::year_month_day& start,
+			const std::chrono::year_month_day& end) const;
+
 	};
+
+
+	inline auto one_1::fraction(
+		const std::chrono::year_month_day& start,
+		const std::chrono::year_month_day& end) const
+	{
+		return 1.0;
+	}
 
 }

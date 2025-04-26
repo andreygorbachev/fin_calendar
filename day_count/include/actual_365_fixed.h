@@ -23,7 +23,6 @@
 #pragma once
 
 #include <chrono>
-#include <variant>
 
 
 namespace day_count
@@ -32,6 +31,24 @@ namespace day_count
 	class actual_365_fixed
 	{
 
+	public:
+
+		auto fraction(
+			const std::chrono::year_month_day& start,
+			const std::chrono::year_month_day& end) const;
+
 	};
+
+
+	inline auto actual_365_fixed::fraction(
+		const std::chrono::year_month_day& start,
+		const std::chrono::year_month_day& end) const
+	{
+		const auto start_date = std::chrono::sys_days(start);
+		const auto end_date = std::chrono::sys_days(end);
+		const auto days_in_year = 365.0;
+		const auto days_between = (end_date - start_date).count();
+		return static_cast<double>(days_between) / days_in_year;
+	}
 
 }
