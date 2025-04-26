@@ -61,6 +61,7 @@ namespace business_day_convention
 		);
 	}
 
+	// maybe in this project we should only use year_month_day
 	inline auto make_business_day(
 		const std::chrono::sys_days& sd,
 		const business_day_convention& bdc,
