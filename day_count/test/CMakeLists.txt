@@ -9,6 +9,8 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(googletest)
 
 add_executable(${PROJECT_NAME}
+  actual_360.cpp
+  actual_365_fixed.cpp
   day_count.cpp
 )
 

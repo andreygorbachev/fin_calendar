@@ -20,21 +20,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#pragma once
+#include <day_count.h>
+
+#include <gtest/gtest.h>
 
 #include <chrono>
-#include <variant>
 
-#include "actual_360.h"
-#include "actual_365_fixed.h"
+using namespace std;
+using namespace std::chrono;
 
 
 namespace day_count
 {
 
-	using day_count = std::variant<
-		actual_360,
-		actual_365_fixed
-	>;
+	TEST(actual_360, Test1)
+	{
+	}
 
 }
