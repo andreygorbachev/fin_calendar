@@ -33,8 +33,13 @@ using namespace std::chrono;
 namespace day_count
 {
 
-	TEST(actual_360, Test1)
+	TEST(actual_360, fraction1)
 	{
+		const auto dc = actual_360{};
+
+		EXPECT_EQ(1.0 / 360.0, dc.fraction(2025y / April / 24d, 2025y / April / 25d));
+		EXPECT_EQ(365.0 / 360.0, dc.fraction(2024y / April / 25d, 2025y / April / 25d));
+		EXPECT_EQ(366.0 / 360.0, dc.fraction(2023y / April / 25d, 2024y / April / 25d));
 	}
 
 }
