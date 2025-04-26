@@ -39,4 +39,19 @@ namespace day_count
 		actual_365_fixed
 	>;
 
+
+	inline auto fraction(
+		const std::chrono::year_month_day& start,
+		const std::chrono::year_month_day& end,
+		const day_count& dc
+	)
+	{
+		return std::visit(
+			[&](const auto& dc)
+			{
+				return dc.fraction(start, end);
+			},
+			dc
+		);
+	}
 }

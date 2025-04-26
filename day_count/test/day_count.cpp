@@ -39,12 +39,15 @@ namespace day_count
 
 		const auto _1_1 = one_1{};
 		dc = _1_1;
+		EXPECT_EQ(1.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
 
 		const auto a_360 = actual_360{};
 		dc = a_360;
+		EXPECT_EQ(1.0 / 360.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
 
 		const auto a_365f = actual_365_fixed{};
 		dc = a_365f;
+		EXPECT_EQ(1.0 / 365.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
 	}
 
 }
