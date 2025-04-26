@@ -8,14 +8,21 @@ set(CMAKE_CXX_EXTENSIONS Off)
 
 set(GREGORIAN_CALENDAR_MINIMAL TRUE)
 
-#find_package(Calendar)
 include(FetchContent)
+
 FetchContent_Declare(
   calendar
   GIT_REPOSITORY https://github.com/andreygorbachev/calendar.git
   GIT_TAG        main
 )
 FetchContent_MakeAvailable(calendar)
+
+FetchContent_Declare(
+  googletest
+  GIT_REPOSITORY https://github.com/google/googletest.git
+  GIT_TAG        v1.16.0
+)
+FetchContent_MakeAvailable(googletest)
 
 add_subdirectory(business_day_convention)
 add_subdirectory(frequency)
