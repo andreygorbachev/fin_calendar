@@ -25,6 +25,7 @@
 #include <chrono>
 #include <variant>
 
+#include "1_1.h"
 #include "actual_360.h"
 #include "actual_365_fixed.h"
 
@@ -33,6 +34,7 @@ namespace day_count
 {
 
 	using day_count = std::variant<
+		one_1,
 		actual_360,
 		actual_365_fixed
 	>;
