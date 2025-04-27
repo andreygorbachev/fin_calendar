@@ -4,6 +4,7 @@ add_executable(${PROJECT_NAME}
   1_1.cpp
   actual_360.cpp
   actual_365_fixed.cpp
+  actual_actual_ICMA.cpp
   day_count.cpp
 )
 

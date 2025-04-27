@@ -23,39 +23,38 @@
 #pragma once
 
 #include <chrono>
-#include <variant>
-
-#include "1_1.h"
-#include "actual_360.h"
-#include "actual_365_fixed.h"
-#include "actual_actual_ICMA.h"
 
 
 namespace day_count
 {
 
-	using day_count = std::variant<
-		one_1,
-		actual_360,
-		actual_365_fixed,
-		actual_actual_ICMA
-	>;
-
-
-	inline auto fraction(
-		const std::chrono::year_month_day& start,
-		const std::chrono::year_month_day& end,
-		const day_count& dc
-	) -> double
+	class actual_actual_ICMA
 	{
-		using double_fraction = std::chrono::duration<double, std::chrono::years::period>; // this allows year fraction to be something different from double (like decimal)
 
-		const auto df = std::visit(
-			[&](const auto& dc) { return double_fraction{ dc.fraction(start, end) }; },
-			dc
-		);
+	public:
 
-		return df.count();
+		auto fraction(
+			const std::chrono::year_month_day& start,
+			const std::chrono::year_month_day& end
+		) const noexcept;
+
+	};
+
+
+	// mock it up for now
+	using _365s = std::chrono::duration<int, std::ratio_divide<std::chrono::years::period, std::ratio<365>>>;
+	using _366s = std::chrono::duration<int, std::ratio_divide<std::chrono::years::period, std::ratio<366>>>;
+
+	inline auto actual_actual_ICMA::fraction(
+		const std::chrono::year_month_day& start,
+		const std::chrono::year_month_day& end
+	) const noexcept
+	{
+		const auto start_date = std::chrono::sys_days{ start };
+		const auto end_date = std::chrono::sys_days{ end };
+		const auto days_between = (end_date - start_date).count();
+
+		return _365s{ days_between } + _366s{ days_between };
 	}
 
 }

@@ -20,42 +20,26 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#pragma once
+#include <actual_actual_ICMA.h>
+
+#include <gtest/gtest.h>
 
 #include <chrono>
-#include <variant>
 
-#include "1_1.h"
-#include "actual_360.h"
-#include "actual_365_fixed.h"
-#include "actual_actual_ICMA.h"
+using namespace std;
+using namespace std::chrono;
 
 
 namespace day_count
 {
 
-	using day_count = std::variant<
-		one_1,
-		actual_360,
-		actual_365_fixed,
-		actual_actual_ICMA
-	>;
-
-
-	inline auto fraction(
-		const std::chrono::year_month_day& start,
-		const std::chrono::year_month_day& end,
-		const day_count& dc
-	) -> double
+	TEST(actual_actual_ICMA, fraction1)
 	{
-		using double_fraction = std::chrono::duration<double, std::chrono::years::period>; // this allows year fraction to be something different from double (like decimal)
+		const auto dc = actual_actual_ICMA{};
 
-		const auto df = std::visit(
-			[&](const auto& dc) { return double_fraction{ dc.fraction(start, end) }; },
-			dc
-		);
-
-		return df.count();
+//		EXPECT_EQ(1.0 / 365.0, dc.fraction(2025y / April / 24d, 2025y / April / 25d));
+//		EXPECT_EQ(365.0 / 365.0, dc.fraction(2024y / April / 25d, 2025y / April / 25d));
+//		EXPECT_EQ(366.0 / 365.0, dc.fraction(2023y / April / 25d, 2024y / April / 25d));
 	}
 
 }
