@@ -36,7 +36,7 @@ namespace day_count
 		auto fraction(
 			const std::chrono::year_month_day& start,
 			const std::chrono::year_month_day& end
-		) const noexcept -> double;
+		) const noexcept;
 
 	};
 
@@ -44,9 +44,9 @@ namespace day_count
 	inline auto one_1::fraction(
 		const std::chrono::year_month_day& start,
 		const std::chrono::year_month_day& end
-	) const noexcept -> double
+	) const noexcept
 	{
-		return 1.0;
+		return 1;
 	}
 
 }

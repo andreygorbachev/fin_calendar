@@ -44,15 +44,16 @@ namespace day_count
 		const std::chrono::year_month_day& start,
 		const std::chrono::year_month_day& end,
 		const day_count& dc
-	)
+	) -> double
 	{
-		return std::visit(
-			[&](const auto& dc)
-			{
-				return dc.fraction(start, end);
-			},
+		using double_fraction = std::chrono::duration<double, std::chrono::years::period>; // this allows year fraction to be something different from double (like decimal)
+
+		const auto df = std::visit(
+			[&](const auto& dc) { return double_fraction{ dc.fraction(start, end) }; },
 			dc
 		);
+
+		return df.count();
 	}
 
 }
