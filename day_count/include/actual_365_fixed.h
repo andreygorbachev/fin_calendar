@@ -46,8 +46,8 @@ namespace day_count
 		const std::chrono::year_month_day& end
 	) const -> double
 	{
-		const auto start_date = std::chrono::sys_days(start);
-		const auto end_date = std::chrono::sys_days(end);
+		const auto start_date = std::chrono::sys_days{ start };
+		const auto end_date = std::chrono::sys_days{ end };
 		const auto days_in_year = 365.0;
 		const auto days_between = (end_date - start_date).count();
 		return static_cast<double>(days_between) / days_in_year;
