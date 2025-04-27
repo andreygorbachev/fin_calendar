@@ -5,6 +5,7 @@ add_library(${PROJECT_NAME} INTERFACE
   actual_360.h
   actual_365_fixed.h
   actual_actual_ICMA.h
+  calculation_252.h
   day_count.h
 )
 

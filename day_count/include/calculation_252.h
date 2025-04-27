@@ -20,37 +20,39 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <day_count.h>
-
-#include <gtest/gtest.h>
+#pragma once
 
 #include <chrono>
-
-using namespace std;
-using namespace std::chrono;
 
 
 namespace day_count
 {
 
-	TEST(day_count, fraction1)
+	class calculation_252
 	{
-		auto dc = day_count{};
 
-		dc = one_1{};
-		EXPECT_EQ(1.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
+	public:
 
-		dc = actual_360{};
-		EXPECT_EQ(1.0 / 360.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
+		auto fraction(
+			const std::chrono::year_month_day& start,
+			const std::chrono::year_month_day& end
+		) const noexcept;
 
-		dc = actual_365_fixed{};
-		EXPECT_EQ(1.0 / 365.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
+	};
 
-		dc = actual_actual_ICMA{};
-		EXPECT_DOUBLE_EQ(1.0 / 365.0 + 1.0 / 366.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
 
-		dc = calculation_252{};
-		EXPECT_EQ(1.0 / 252.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
+	using _252s = std::chrono::duration<int, std::ratio_divide<std::chrono::years::period, std::ratio<252>>>;
+
+	inline auto calculation_252::fraction(
+		const std::chrono::year_month_day& start,
+		const std::chrono::year_month_day& end
+	) const noexcept
+	{
+		const auto start_date = std::chrono::sys_days{ start };
+		const auto end_date = std::chrono::sys_days{ end };
+		const auto days_between = (end_date - start_date).count(); // should be business days
+
+		return _252s{ days_between };
 	}
 
 }
