@@ -36,7 +36,7 @@ namespace day_count
 		auto fraction(
 			const std::chrono::year_month_day& start,
 			const std::chrono::year_month_day& end
-		) const;
+		) const noexcept;
 
 	};
 
@@ -46,7 +46,7 @@ namespace day_count
 	inline auto actual_360::fraction(
 		const std::chrono::year_month_day& start,
 		const std::chrono::year_month_day& end
-	) const
+	) const noexcept
 	{
 		const auto start_date = std::chrono::sys_days{ start };
 		const auto end_date = std::chrono::sys_days{ end };
