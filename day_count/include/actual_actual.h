@@ -28,6 +28,9 @@
 //#include <schedule.h>
 
 
+using _365s = std::chrono::duration<int, std::ratio_divide<std::chrono::years::period, std::ratio<365>>>;
+using _366s = std::chrono::duration<int, std::ratio_divide<std::chrono::years::period, std::ratio<366>>>;
+
 namespace day_count
 {
 
@@ -36,42 +39,58 @@ namespace day_count
 
 	public:
 
+		using duration = decltype(_365s{ 0 } + _366s{ 0 });
+
 		auto fraction(
 			const std::chrono::year_month_day& start,
 			const std::chrono::year_month_day& end
-		) const noexcept;
+		) const noexcept -> duration;
 
 	};
 
 
-	using _365s = std::chrono::duration<int, std::ratio_divide<std::chrono::years::period, std::ratio<365>>>;
-	using _366s = std::chrono::duration<int, std::ratio_divide<std::chrono::years::period, std::ratio<366>>>;
-
 	inline auto actual_actual::fraction(
 		const std::chrono::year_month_day& start,
 		const std::chrono::year_month_day& end
-	) const noexcept
+	) const noexcept -> duration
 	{
+		const auto start_date = std::chrono::sys_days{ start };
+		const auto end_date = std::chrono::sys_days{ end };
+
 		const auto start_year = start.year();
 		const auto end_year = end.year();
 
 		if (start_year == end_year)
 		{
-			const auto start_date = std::chrono::sys_days{ start };
-			const auto end_date = std::chrono::sys_days{ end };
 			const auto days_between = (end_date - start_date).count();
 
 			if (start_year.is_leap())
-				return _366s{ days_between } + _365s{ 0 }; // maybe specify the return type explicitly, so no need to do magic here
+				return _366s{ days_between };
 			else
-				return _366s{ 0 } + _365s{ days_between };
+				return _365s{ days_between };
 		}
 		else
-			return
-				fraction(start, start_year / gregorian::LastDayOfDecember) + // might not be right
-				fraction(end_year / gregorian::FirstDayOfJanuary, end) +
-				_365s{ ((end_year - start_year).count() - 1) * 365};
-//				end_year - start_year - 1;
+		{
+			duration result;
+
+			const auto end_year_1 = std::chrono::sys_days{ start_year / gregorian::LastDayOfDecember };
+			const auto days_between_1 = (end_year_1 - start_date).count();
+			if (start_year.is_leap())
+				result = _366s{ days_between_1 + 1 };
+			else
+				result = _365s{ days_between_1 + 1 };
+
+			const auto start_year_last = std::chrono::sys_days{ end_year / gregorian::FirstDayOfJanuary };
+			const auto days_between_last = (end_date - start_year_last).count();
+			if (end_year.is_leap())
+				result += _366s{ days_between_last };
+			else
+				result += _365s{ days_between_last };
+
+			result += end_year - start_year - std::chrono::years{ 1 };
+
+			return result;
+		}
 	}
 
 }
