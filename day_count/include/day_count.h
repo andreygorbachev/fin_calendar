@@ -30,6 +30,7 @@
 #include "actual_actual_ICMA.h"
 #include "actual_365_fixed.h"
 #include "actual_360.h"
+#include "actual_365_L.h"
 #include "calculation_252.h"
 
 
@@ -42,6 +43,7 @@ namespace day_count
 		actual_actual_ICMA,
 		actual_365_fixed,
 		actual_360,
+		actual_365_L,
 		calculation_252
 	>;
 
