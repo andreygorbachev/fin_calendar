@@ -66,6 +66,9 @@ namespace day_count
 
 		dc = calculation_252{};
 		EXPECT_EQ(1.0 / 252.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
+
+		dc = RBA_bond_basis{};
+		EXPECT_EQ(1.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
 	}
 
 }

@@ -20,56 +20,26 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#pragma once
+#include <RBA_bond_basis.h>
+
+#include <gtest/gtest.h>
 
 #include <chrono>
-#include <variant>
 
-#include "1_1.h"
-#include "actual_actual.h"
-#include "actual_actual_ICMA.h"
-#include "actual_365_fixed.h"
-#include "actual_360.h"
-#include "30_360.h"
-#include "30_E_360.h"
-#include "30_E_360_ISDA.h"
-#include "actual_365_L.h"
-#include "calculation_252.h"
-#include "RBA_bond_basis.h"
+using namespace std;
+using namespace std::chrono;
 
 
 namespace day_count
 {
 
-	using day_count = std::variant<
-		one_1,
-		actual_actual,
-		actual_actual_ICMA,
-		actual_365_fixed,
-		actual_360,
-		thirty_360,
-		thirty_E_360,
-		thirty_E_360_ISDA,
-		actual_365_L,
-		calculation_252,
-		RBA_bond_basis
-	>;
-
-
-	inline auto fraction(
-		const std::chrono::year_month_day& start,
-		const std::chrono::year_month_day& end,
-		const day_count& dc
-	) -> double
+	TEST(RBA_bond_basis, fraction1)
 	{
-		using double_fraction = std::chrono::duration<double, std::chrono::years::period>; // this allows year fraction to be something different from double (like decimal)
+		const auto dc = RBA_bond_basis{};
 
-		const auto df = std::visit(
-			[&](const auto& dc) { return double_fraction{ dc.fraction(start, end) }; },
-			dc
-		);
-
-		return df.count();
+		EXPECT_EQ(1.0, dc.fraction(2025y / April / 24d, 2025y / April / 25d));
+		EXPECT_EQ(1.0, dc.fraction(2024y / April / 25d, 2025y / April / 25d));
+		EXPECT_EQ(1.0, dc.fraction(2023y / April / 25d, 2024y / April / 25d));
 	}
 
 }
