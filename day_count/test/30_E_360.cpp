@@ -20,7 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-#include <day_count.h>
+#include <30_E_360.h>
 
 #include <gtest/gtest.h>
 
@@ -33,39 +33,13 @@ using namespace std::chrono;
 namespace day_count
 {
 
-	TEST(day_count, fraction1)
+	TEST(thirty_E_360, fraction1)
 	{
-		auto dc = day_count{};
+		const auto dc = thirty_E_360{};
 
-		dc = one_1{};
-		EXPECT_EQ(1.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
-
-		dc = actual_actual{};
-		EXPECT_EQ(1.0 / 365.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
-
-		dc = actual_actual_ICMA{};
-		EXPECT_DOUBLE_EQ(1.0 / 365.0 + 1.0 / 366.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
-
-		dc = actual_365_fixed{};
-		EXPECT_EQ(1.0 / 365.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
-
-		dc = actual_360{};
-		EXPECT_EQ(1.0 / 360.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
-
-		dc = thirty_360{};
-		EXPECT_EQ(1.0 / 360.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
-
-		dc = thirty_E_360{};
-		EXPECT_EQ(1.0 / 360.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
-
-		dc = thirty_E_360_ISDA{};
-		EXPECT_EQ(1.0 / 360.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
-
-		dc = actual_365_L{};
-		EXPECT_EQ(1.0 / 365.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
-
-		dc = calculation_252{};
-		EXPECT_EQ(1.0 / 252.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
+//		EXPECT_EQ(1.0 / 360.0, dc.fraction(2025y / April / 24d, 2025y / April / 25d));
+//		EXPECT_EQ(365.0 / 360.0, dc.fraction(2024y / April / 25d, 2025y / April / 25d));
+//		EXPECT_EQ(366.0 / 360.0, dc.fraction(2023y / April / 25d, 2024y / April / 25d));
 	}
 
 }

@@ -6,6 +6,9 @@ add_executable(${PROJECT_NAME}
   actual_actual_ICMA.cpp
   actual_365_fixed.cpp
   actual_360.cpp
+  30_360.cpp
+  30_E_360.cpp
+  30_E_360_ISDA.cpp
   actual_365_L.cpp
   calculation_252.cpp
   day_count.cpp

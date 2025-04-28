@@ -23,51 +23,36 @@
 #pragma once
 
 #include <chrono>
-#include <variant>
-
-#include "1_1.h"
-#include "actual_actual.h"
-#include "actual_actual_ICMA.h"
-#include "actual_365_fixed.h"
-#include "actual_360.h"
-#include "30_360.h"
-#include "30_E_360.h"
-#include "30_E_360_ISDA.h"
-#include "actual_365_L.h"
-#include "calculation_252.h"
 
 
 namespace day_count
 {
 
-	using day_count = std::variant<
-		one_1,
-		actual_actual,
-		actual_actual_ICMA,
-		actual_365_fixed,
-		actual_360,
-		thirty_360,
-		thirty_E_360,
-		thirty_E_360_ISDA,
-		actual_365_L,
-		calculation_252
-	>;
-
-
-	inline auto fraction(
-		const std::chrono::year_month_day& start,
-		const std::chrono::year_month_day& end,
-		const day_count& dc
-	) -> double
+	class thirty_360
 	{
-		using double_fraction = std::chrono::duration<double, std::chrono::years::period>; // this allows year fraction to be something different from double (like decimal)
 
-		const auto df = std::visit(
-			[&](const auto& dc) { return double_fraction{ dc.fraction(start, end) }; },
-			dc
-		);
+	public:
 
-		return df.count();
+		auto fraction(
+			const std::chrono::year_month_day& start,
+			const std::chrono::year_month_day& end
+		) const noexcept;
+
+	};
+
+
+	using _360s = std::chrono::duration<int, std::ratio_divide<std::chrono::years::period, std::ratio<360>>>;
+
+	inline auto thirty_360::fraction(
+		const std::chrono::year_month_day& start,
+		const std::chrono::year_month_day& end
+	) const noexcept
+	{
+		const auto start_date = std::chrono::sys_days{ start };
+		const auto end_date = std::chrono::sys_days{ end };
+		const auto days_between = (end_date - start_date).count();
+
+		return _360s{ days_between };
 	}
 
 }

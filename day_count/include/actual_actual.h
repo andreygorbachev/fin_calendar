@@ -34,7 +34,7 @@ using _366s = std::chrono::duration<int, std::ratio_divide<std::chrono::years::p
 namespace day_count
 {
 
-	class actual_actual
+	class actual_actual // should we call it actual_actual_ISDA?
 	{
 
 	public:
