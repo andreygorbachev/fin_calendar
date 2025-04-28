@@ -33,7 +33,7 @@
 namespace business_day_convention
 {
 
-	inline auto _make_holiday_schedule_england() -> gregorian::schedule
+	inline auto _make_holiday_schedule_england()
 	{
 		using namespace std::chrono;
 		using namespace gregorian;
@@ -110,7 +110,7 @@ namespace business_day_convention
 		return s;
 	}
 
-	inline auto _make_calendar_england() -> gregorian::calendar
+	inline auto _make_calendar_england()
 	{
 		using namespace std::chrono;
 		using namespace gregorian;
@@ -159,7 +159,7 @@ namespace business_day_convention
 		return s;
 	}
 
-	inline auto _make_calendar_starts_ends_with_holidays() -> gregorian::calendar
+	inline auto _make_calendar_starts_ends_with_holidays()
 	{
 		using namespace std::chrono;
 		using namespace gregorian;
@@ -178,7 +178,7 @@ namespace business_day_convention
 		return s;
 	}
 
-	inline auto _make_calendar_all_holidays() -> gregorian::calendar
+	inline auto _make_calendar_all_holidays()
 	{
 		using namespace std::chrono;
 		using namespace gregorian;

@@ -96,7 +96,7 @@ namespace day_count
 		};
 	}
 
-	inline auto make_calendar_ANBIMA()
+	inline auto make_calendar_ANBIMA() -> const gregorian::calendar&
 	{
 		static const auto s = _make_calendar_ANBIMA();
 		return s;
