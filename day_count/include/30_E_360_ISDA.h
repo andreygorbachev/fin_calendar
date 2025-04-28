@@ -48,9 +48,24 @@ namespace day_count
 		const std::chrono::year_month_day& end
 	) const noexcept
 	{
-		const auto start_date = std::chrono::sys_days{ start };
-		const auto end_date = std::chrono::sys_days{ end };
-		const auto days_between = (end_date - start_date).count();
+		const auto start_year = start.year();
+		const auto start_month = start.month();
+		auto start_day = start.day();
+		const auto end_year = end.year();
+		const auto end_month = end.month();
+		auto end_day = end.day();
+
+		if (start == start.year() / start.month() / std::chrono::last)
+			start_day = std::chrono::day{ 30 };
+		if (end == end.year() / end.month() / std::chrono::last)
+			end_day = std::chrono::day{ 30 };
+
+		// termination date should also be part of the calculation
+
+		const auto days_between =
+			(end_year - start_year).count() * 360 +
+			(end_month - start_month).count() * 30 +
+			(end_day - start_day).count();
 
 		return _360s{ days_between };
 	}
