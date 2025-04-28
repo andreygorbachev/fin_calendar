@@ -42,7 +42,7 @@ namespace day_count
 
 	TEST(calculation_252, fraction1)
 	{
-		const auto dc = calculation_252{ make_calendar_england() };
+		const auto dc = calculation_252{ make_calendar_ANBIMA() };
 
 //		EXPECT_EQ(1.0 / 360.0, dc.fraction(2025y / April / 24d, 2025y / April / 25d));
 //		EXPECT_EQ(365.0 / 360.0, dc.fraction(2024y / April / 25d, 2025y / April / 25d));

@@ -27,135 +27,78 @@
 #include <schedule.h>
 #include <annual_holidays.h>
 #include <calendar.h>
-#include <business_day_adjusters.h>
 
 
-namespace day_count // Brazil Calendar is probably needed instead
+namespace day_count
 {
 
-	inline auto _make_holiday_schedule_england() -> gregorian::schedule
+	inline auto _make_calendar_ANBIMA()
 	{
 		using namespace std::chrono;
 		using namespace gregorian;
 
-		auto holidays = schedule::dates{
-			year{ 2018 } / January / day{ 1u },
-			year{ 2018 } / March / day{ 30u },
-			year{ 2018 } / April / day{ 2u },
-			year{ 2018 } / May / day{ 7u },
-			year{ 2018 } / May / day{ 28u },
-			year{ 2018 } / August / day{ 27u },
-			year{ 2018 } / December / day{ 25u },
-			year{ 2018 } / December / day{ 26u },
+		const auto TiradentesDay = named_holiday{ April / 21d };
+		const auto LabourDay = named_holiday{ May / 1d };
+		const auto ShroveMonday = offset_holiday{ &_Easter, std::chrono::days{ -47 - 1 } }; // should it be in the actual library?
+		const auto ShroveTuesday = offset_holiday{ &_Easter, std::chrono::days{ -46 - 1 } }; // should it be in the actual library?
+		const auto CorpusChristi = offset_holiday{ &_Easter, std::chrono::days{ 60 } }; // should it be in the actual library?
+		const auto IndependenceDay = named_holiday{ September / 7d };
+		const auto OurLadyOfAparecida = named_holiday{ October / 12d };
+		const auto AllSoulsDay = named_holiday{ November / 2d }; // should it be in the actual library?
+		const auto RepublicProclamationDay = named_holiday{ November / 15d };
 
-			year{ 2019 } / January / day{ 1u },
-			year{ 2019 } / April / day{ 19u },
-			year{ 2019 } / April / day{ 22u },
-			year{ 2019 } / May / day{ 6u },
-			year{ 2019 } / May / day{ 27u },
-			year{ 2019 } / August / day{ 26u },
-			year{ 2019 } / December / day{ 25u },
-			year{ 2019 } / December / day{ 26u },
-
-			year{ 2020 } / January / day{ 1u },
-			year{ 2020 } / April / day{ 10u },
-			year{ 2020 } / April / day{ 13u },
-			year{ 2020 } / May / day{ 8u },
-			year{ 2020 } / May / day{ 25u },
-			year{ 2020 } / August / day{ 31u },
-			year{ 2020 } / December / day{ 25u },
-			year{ 2020 } / December / day{ 28u },
-
-			year{ 2021 } / January / day{ 1u },
-			year{ 2021 } / April / day{ 2u },
-			year{ 2021 } / April / day{ 5u },
-			year{ 2021 } / May / day{ 3u },
-			year{ 2021 } / May / day{ 31u },
-			year{ 2021 } / August / day{ 30u },
-			year{ 2021 } / December / day{ 27u },
-			year{ 2021 } / December / day{ 28u },
-
-			year{ 2022 } / January / day{ 3u },
-			year{ 2022 } / April / day{ 15u },
-			year{ 2022 } / April / day{ 18u },
-			year{ 2022 } / May / day{ 2u },
-			year{ 2022 } / June / day{ 2u },
-			year{ 2022 } / June / day{ 3u },
-			year{ 2022 } / August / day{ 29u },
-			year{ 2022 } / September / day{ 19u },
-			year{ 2022 } / December / day{ 26u },
-			year{ 2022 } / December / day{ 27u },
-
-			year{ 2023 } / January / day{ 2u },
-			year{ 2023 } / April / day{ 7u },
-			year{ 2023 } / April / day{ 10u },
-			year{ 2023 } / May / day{ 1u },
-			year{ 2023 } / May / day{ 8u },
-			year{ 2023 } / May / day{ 29u },
-			year{ 2023 } / August / day{ 28u },
-			year{ 2023 } / December / day{ 25u },
-			year{ 2023 } / December / day{ 26u },
-		};
-
-		return schedule{
-			days_period{ year{ 2018 } / gregorian::FirstDayOfJanuary, year{ 2023 } / gregorian::LastDayOfDecember },
-			std::move(holidays)
-		};
-	}
-
-	inline auto make_holiday_schedule_england() -> const gregorian::schedule&
-	{
-		static const auto s = _make_holiday_schedule_england();
-
-		return s;
-	}
-
-	inline auto _make_calendar_england() -> gregorian::calendar
-	{
-		using namespace std::chrono;
-		using namespace gregorian;
-
-		const auto known_part = _make_holiday_schedule_england();
-
-		const auto generated_part_from = known_part.get_from_until().get_until().year() + years{ 1 };
-		const auto generated_part_until = generated_part_from + years{ 10 }; // factor out this const
-
-		const auto EarlyMayBankHoliday = weekday_indexed_holiday{ May / Monday[1] };
-		const auto SpringBankHoliday = weekday_last_holiday{ May / Monday[last] };
-		const auto SummerBankHoliday = weekday_last_holiday{ August / Monday[last] };
-
-		const auto rules = annual_holiday_storage{
+		const auto rules1 = annual_holiday_storage{
 			&NewYearsDay,
+			&ShroveMonday,
+			&ShroveTuesday,
 			&GoodFriday,
-			&EasterMonday,
-			&EarlyMayBankHoliday,
-			&SpringBankHoliday,
-			&SummerBankHoliday,
-			&ChristmasDay,
-			&BoxingDay
+			&TiradentesDay,
+			&LabourDay,
+			&CorpusChristi,
+			&IndependenceDay,
+			&OurLadyOfAparecida,
+			&AllSoulsDay,
+			&RepublicProclamationDay,
+			&ChristmasDay
 		};
 
-		const auto generated_part = make_holiday_schedule(
-			years_period{ generated_part_from, generated_part_until },
-			rules
+		const auto s1 = make_holiday_schedule(
+			years_period{ 2001y, 2023y },
+			rules1
 		);
 
-		// setup a calendar for the generated part only (to do substitution for the generated dates)
-		auto cal = calendar{
-			SaturdaySundayWeekend,
-			generated_part
+		const auto BlackConsciousnessDay = named_holiday{ November / 20d };
+
+		const auto rules2 = annual_holiday_storage{
+			&NewYearsDay,
+			&ShroveMonday,
+			&ShroveTuesday,
+			&GoodFriday,
+			&TiradentesDay,
+			&LabourDay,
+			&CorpusChristi,
+			&IndependenceDay,
+			&OurLadyOfAparecida,
+			&AllSoulsDay,
+			&RepublicProclamationDay,
+			&BlackConsciousnessDay,
+			&ChristmasDay
 		};
-		cal.substitute(Following);
+
+		const auto s2 = make_holiday_schedule(
+			years_period{ 2024y, 2099y },
+			rules2
+		);
 
 		return calendar{
 			SaturdaySundayWeekend,
-			known_part + cal.get_schedule()
+			s1 + s2
 		};
 	}
 
-	inline auto make_calendar_england() -> const gregorian::calendar&
+	inline auto make_calendar_ANBIMA()
 	{
-		static const auto s = _make_calendar_england();
+		static const auto s = _make_calendar_ANBIMA();
 		return s;
 	}
 
