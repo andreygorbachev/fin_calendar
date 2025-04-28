@@ -2,9 +2,10 @@ project("day-count")
 
 add_library(${PROJECT_NAME} INTERFACE
   1_1.h
-  actual_360.h
-  actual_365_fixed.h
+  actual_actual.h
   actual_actual_ICMA.h
+  actual_365_fixed.h
+  actual_360.h
   calculation_252.h
   day_count.h
 )

@@ -26,9 +26,10 @@
 #include <variant>
 
 #include "1_1.h"
-#include "actual_360.h"
-#include "actual_365_fixed.h"
+#include "actual_actual.h"
 #include "actual_actual_ICMA.h"
+#include "actual_365_fixed.h"
+#include "actual_360.h"
 #include "calculation_252.h"
 
 
@@ -37,9 +38,10 @@ namespace day_count
 
 	using day_count = std::variant<
 		one_1,
-		actual_360,
-		actual_365_fixed,
+		actual_actual,
 		actual_actual_ICMA,
+		actual_365_fixed,
+		actual_360,
 		calculation_252
 	>;
 
