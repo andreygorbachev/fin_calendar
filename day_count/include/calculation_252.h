@@ -24,6 +24,9 @@
 
 #include <chrono>
 
+#include <calendar.h>
+#include <period.h>
+
 
 namespace day_count
 {
@@ -33,12 +36,23 @@ namespace day_count
 
 	public:
 
+		explicit calculation_252(gregorian::calendar calendar);
+
 		auto fraction(
 			const std::chrono::year_month_day& start,
 			const std::chrono::year_month_day& end
 		) const noexcept;
 
+	private:
+
+		gregorian::calendar _calendar;
+
 	};
+
+
+	inline calculation_252::calculation_252(gregorian::calendar calendar) : _calendar{ calendar }
+	{
+	}
 
 
 	using _252s = std::chrono::duration<int, std::ratio_divide<std::chrono::years::period, std::ratio<252>>>;
@@ -48,9 +62,11 @@ namespace day_count
 		const std::chrono::year_month_day& end
 	) const noexcept
 	{
-		const auto start_date = std::chrono::sys_days{ start };
-		const auto end_date = std::chrono::sys_days{ end };
-		const auto days_between = (end_date - start_date).count(); // should be business days
+		const auto start_end = gregorian::days_period{
+			start,
+			std::chrono::sys_days{ end } - std::chrono::days{ 1 } // exclude the end date
+		}; // this will only work for end after start at the moment
+		const auto days_between = _calendar.count_business_days(start_end);
 
 		return _252s{ days_between };
 	}

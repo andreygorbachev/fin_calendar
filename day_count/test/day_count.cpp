@@ -20,6 +20,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#include "setup.h"
+
 #include <day_count.h>
 
 #include <gtest/gtest.h>
@@ -64,7 +66,7 @@ namespace day_count
 		dc = actual_365_L{};
 		EXPECT_EQ(1.0 / 365.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
 
-		dc = calculation_252{};
+		dc = calculation_252{ make_calendar_england() };
 		EXPECT_EQ(1.0 / 252.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
 
 		dc = RBA_bond_basis{};

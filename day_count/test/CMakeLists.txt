@@ -13,6 +13,7 @@ add_executable(${PROJECT_NAME}
   calculation_252.cpp
   RBA_bond_basis
   day_count.cpp
+  setup.h
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE

@@ -20,14 +20,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+#include "setup.h"
+
 #include <calculation_252.h>
 
 #include <gtest/gtest.h>
+
+#include <calendar.h>
+#include <weekend.h>
+#include <schedule.h>
 
 #include <chrono>
 
 using namespace std;
 using namespace std::chrono;
+using namespace gregorian;
 
 
 namespace day_count
@@ -35,7 +42,7 @@ namespace day_count
 
 	TEST(calculation_252, fraction1)
 	{
-		const auto dc = calculation_252{};
+		const auto dc = calculation_252{ make_calendar_england() };
 
 //		EXPECT_EQ(1.0 / 360.0, dc.fraction(2025y / April / 24d, 2025y / April / 25d));
 //		EXPECT_EQ(365.0 / 360.0, dc.fraction(2024y / April / 25d, 2025y / April / 25d));
