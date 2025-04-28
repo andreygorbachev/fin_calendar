@@ -39,6 +39,8 @@ namespace day_count
 
 		explicit calculation_252(gregorian::calendar cal);
 
+	public:
+
 		auto fraction(
 			const std::chrono::year_month_day& start,
 			const std::chrono::year_month_day& end
