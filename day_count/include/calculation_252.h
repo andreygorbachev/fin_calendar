@@ -23,6 +23,7 @@
 #pragma once
 
 #include <chrono>
+#include <memory>
 
 #include <calendar.h>
 #include <period.h>
@@ -36,7 +37,7 @@ namespace day_count
 
 	public:
 
-		explicit calculation_252(gregorian::calendar calendar);
+		explicit calculation_252(gregorian::calendar cal);
 
 		auto fraction(
 			const std::chrono::year_month_day& start,
@@ -45,12 +46,13 @@ namespace day_count
 
 	private:
 
-		gregorian::calendar _calendar;
+		gregorian::calendar _cal;
 
 	};
 
 
-	inline calculation_252::calculation_252(gregorian::calendar calendar) : _calendar{ calendar }
+	inline calculation_252::calculation_252(gregorian::calendar cal) :
+		_cal{ std::move(cal) }
 	{
 	}
 
@@ -66,7 +68,7 @@ namespace day_count
 			start,
 			std::chrono::sys_days{ end } - std::chrono::days{ 1 } // exclude the end date
 		}; // this will only work for end after start at the moment
-		const auto days_between = _calendar.count_business_days(start_end);
+		const auto days_between = _cal.count_business_days(start_end);
 
 		return _252s{ days_between };
 	}
