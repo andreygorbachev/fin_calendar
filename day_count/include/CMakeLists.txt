@@ -11,7 +11,7 @@ add_library(${PROJECT_NAME} INTERFACE
   30_E_360_ISDA.h
   actual_365_L.h
   calculation_252.h
-  RBA_bond_basis
+  RBA_bond_basis.h
   day_count.h
 )
 
