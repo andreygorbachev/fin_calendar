@@ -22,8 +22,6 @@
 
 #pragma once
 
-#include <memory>
-
 #include <schedule.h>
 #include <annual_holidays.h>
 #include <calendar.h>
