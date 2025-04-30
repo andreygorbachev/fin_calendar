@@ -46,7 +46,7 @@ namespace day_count
 		EXPECT_EQ(1.0 / 365.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
 
 		dc = actual_actual_ICMA{};
-		EXPECT_DOUBLE_EQ(1.0 / 365.0 + 1.0 / 366.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
+		EXPECT_EQ(1.0 / 365.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
 
 		dc = actual_365_fixed{};
 		EXPECT_EQ(1.0 / 365.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));

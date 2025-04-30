@@ -28,6 +28,7 @@
 namespace day_count
 {
 
+	template<typename T = double>
 	class thirty_360
 	{
 
@@ -36,17 +37,16 @@ namespace day_count
 		auto fraction(
 			const std::chrono::year_month_day& start,
 			const std::chrono::year_month_day& end
-		) const noexcept;
+		) const noexcept -> T; // how does T interact with noexcept? (maybe we should live without noexcept, or restrict the template)
 
 	};
 
 
-	using _360s = std::chrono::duration<int, std::ratio_divide<std::chrono::years::period, std::ratio<360>>>;
-
-	inline auto thirty_360::fraction(
+	template<typename T>
+	auto thirty_360<T>::fraction(
 		const std::chrono::year_month_day& start,
 		const std::chrono::year_month_day& end
-	) const noexcept
+	) const noexcept -> T
 	{
 		const auto start_year = start.year();
 		const auto start_month = start.month();
@@ -60,12 +60,13 @@ namespace day_count
 		if (end_day == std::chrono::day{ 31 } && start_day > std::chrono::day{ 29 }) // at this stage start_day might have changed, but the formula is still correct
 			end_day = std::chrono::day{ 30 };
 
-		const auto days_between =
+		const auto days_between = static_cast<T>(
 			(end_year - start_year).count() * 360 +
 			(end_month - start_month).count() * 30 +
-			(end_day - start_day).count();
+			(end_day - start_day).count()
+		);
 
-		return _360s{ days_between };
+		return days_between / 360;
 	}
 
 }

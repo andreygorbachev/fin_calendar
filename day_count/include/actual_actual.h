@@ -28,31 +28,28 @@
 //#include <schedule.h>
 
 
-using _365s = std::chrono::duration<int, std::ratio_divide<std::chrono::years::period, std::ratio<365>>>;
-using _366s = std::chrono::duration<int, std::ratio_divide<std::chrono::years::period, std::ratio<366>>>;
-
 namespace day_count
 {
 
+	template<typename T = double>
 	class actual_actual // should we call it actual_actual_ISDA?
 	{
 
 	public:
 
-		using duration = decltype(_365s{ 0 } + _366s{ 0 });
-
 		auto fraction(
 			const std::chrono::year_month_day& start,
 			const std::chrono::year_month_day& end
-		) const noexcept -> duration;
+		) const noexcept -> T;
 
 	};
 
 
-	inline auto actual_actual::fraction(
+	template<typename T>
+	auto actual_actual<T>::fraction(
 		const std::chrono::year_month_day& start,
 		const std::chrono::year_month_day& end
-	) const noexcept -> duration
+	) const noexcept -> T
 	{
 		const auto start_date = std::chrono::sys_days{ start };
 		const auto end_date = std::chrono::sys_days{ end };
@@ -62,32 +59,32 @@ namespace day_count
 
 		if (start_year == end_year)
 		{
-			const auto days_between = (end_date - start_date).count();
+			const auto days_between = static_cast<T>((end_date - start_date).count());
 
 			if (start_year.is_leap())
-				return _366s{ days_between };
+				return days_between / 366;
 			else
-				return _365s{ days_between };
+				return days_between / 365;
 		}
 		else
 		{
-			duration result;
+			T result;
 
 			const auto end_year_1 = std::chrono::sys_days{ start_year / gregorian::LastDayOfDecember };
-			const auto days_between_1 = (end_year_1 - start_date).count();
+			const auto days_between_1 = static_cast<T>((end_year_1 - start_date).count() + 1);
 			if (start_year.is_leap())
-				result = _366s{ days_between_1 + 1 };
+				result = days_between_1 / 366;
 			else
-				result = _365s{ days_between_1 + 1 };
+				result = days_between_1 / 365;
 
 			const auto start_year_last = std::chrono::sys_days{ end_year / gregorian::FirstDayOfJanuary };
-			const auto days_between_last = (end_date - start_year_last).count();
+			const auto days_between_last = static_cast<T>((end_date - start_year_last).count());
 			if (end_year.is_leap())
-				result += _366s{ days_between_last };
+				result += days_between_last / 366;
 			else
-				result += _365s{ days_between_last };
+				result += days_between_last / 365;
 
-			result += end_year - start_year - std::chrono::years{ 1 };
+			result += (end_year - start_year - std::chrono::years{ 1 }).count();
 
 			return result;
 		}

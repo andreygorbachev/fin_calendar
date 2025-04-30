@@ -41,35 +41,34 @@
 namespace day_count
 {
 
+	template<typename T = double>
 	using day_count = std::variant<
-		one_1,
-		actual_actual,
-		actual_actual_ICMA,
-		actual_365_fixed,
-		actual_360,
-		thirty_360,
-		thirty_E_360,
-		thirty_E_360_ISDA,
-		actual_365_L,
-		calculation_252,
-		RBA_bond_basis
+		one_1<T>,
+		actual_actual<T>,
+		actual_actual_ICMA<T>,
+		actual_365_fixed<T>,
+		actual_360<T>,
+		thirty_360<T>,
+		thirty_E_360<T>,
+		thirty_E_360_ISDA<T>,
+		actual_365_L<T>,
+		calculation_252<T>,
+		RBA_bond_basis<T>
 	>;
 
 
 	inline auto fraction(
 		const std::chrono::year_month_day& start,
 		const std::chrono::year_month_day& end,
-		const day_count& dc
+		const day_count<double>& dc
 	) -> double
 	{
-		using double_fraction = std::chrono::duration<double, std::chrono::years::period>; // this allows year fraction to be something different from double (like decimal)
-
 		const auto df = std::visit(
-			[&](const auto& dc) { return double_fraction{ dc.fraction(start, end) }; },
+			[&](const auto& dc) { return dc.fraction(start, end); },
 			dc
 		);
 
-		return df.count();
+		return df;
 	}
 
 }

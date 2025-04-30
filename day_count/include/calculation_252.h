@@ -32,6 +32,7 @@
 namespace day_count
 {
 
+	template<typename T = double>
 	class calculation_252
 	{
 
@@ -44,7 +45,7 @@ namespace day_count
 		auto fraction(
 			const std::chrono::year_month_day& start,
 			const std::chrono::year_month_day& end
-		) const noexcept;
+		) const -> T;
 
 	private:
 
@@ -53,26 +54,26 @@ namespace day_count
 	};
 
 
-	inline calculation_252::calculation_252(gregorian::calendar cal) :
+	template<typename T>
+	calculation_252<T>::calculation_252(gregorian::calendar cal) :
 		cal_{ std::move(cal) }
 	{
 	}
 
 
-	using _252s = std::chrono::duration<int, std::ratio_divide<std::chrono::years::period, std::ratio<252>>>;
-
-	inline auto calculation_252::fraction(
+	template<typename T>
+	auto calculation_252<T>::fraction(
 		const std::chrono::year_month_day& start,
 		const std::chrono::year_month_day& end
-	) const noexcept
+	) const -> T
 	{
 		const auto start_end = gregorian::days_period{
 			start,
 			std::chrono::sys_days{ end } - std::chrono::days{ 1 } // exclude the end date
 		}; // this will only work for end after start at the moment
-		const auto days_between = cal_.count_business_days(start_end);
+		const auto days_between = static_cast<T>(cal_.count_business_days(start_end));
 
-		return _252s{ days_between };
+		return days_between / 252;
 	}
 
 }

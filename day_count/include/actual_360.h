@@ -28,6 +28,7 @@
 namespace day_count
 {
 
+	template<typename T = double>
 	class actual_360
 	{
 
@@ -36,23 +37,22 @@ namespace day_count
 		auto fraction(
 			const std::chrono::year_month_day& start,
 			const std::chrono::year_month_day& end
-		) const noexcept;
+		) const noexcept -> T;
 
 	};
 
 
-	using _360s = std::chrono::duration<int, std::ratio_divide<std::chrono::years::period, std::ratio<360>>>;
-
-	inline auto actual_360::fraction(
+	template<typename T>
+	auto actual_360<T>::fraction(
 		const std::chrono::year_month_day& start,
 		const std::chrono::year_month_day& end
-	) const noexcept
+	) const noexcept -> T
 	{
 		const auto start_date = std::chrono::sys_days{ start };
 		const auto end_date = std::chrono::sys_days{ end };
-		const auto days_between = (end_date - start_date).count();
+		const auto days_between = static_cast<T>((end_date - start_date).count());
 
-		return _360s{ days_between };
+		return days_between / 360;
 	}
 
 }

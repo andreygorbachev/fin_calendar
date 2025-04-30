@@ -28,6 +28,7 @@
 namespace day_count
 {
 
+	template<typename T = double>
 	class one_1
 	{
 
@@ -36,15 +37,16 @@ namespace day_count
 		auto fraction(
 			const std::chrono::year_month_day& start,
 			const std::chrono::year_month_day& end
-		) const noexcept;
+		) const noexcept -> T;
 
 	};
 
 
-	inline auto one_1::fraction(
+	template<typename T>
+	auto one_1<T>::fraction(
 		const std::chrono::year_month_day& start,
 		const std::chrono::year_month_day& end
-	) const noexcept
+	) const noexcept -> T
 	{
 		return 1;
 	}

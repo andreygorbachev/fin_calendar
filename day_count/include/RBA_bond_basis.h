@@ -28,6 +28,7 @@
 namespace day_count
 {
 
+	template<typename T = double>
 	class RBA_bond_basis
 	{
 
@@ -36,15 +37,16 @@ namespace day_count
 		auto fraction(
 			const std::chrono::year_month_day& start,
 			const std::chrono::year_month_day& end
-		) const noexcept;
+		) const noexcept -> T;
 
 	};
 
 
-	inline auto RBA_bond_basis::fraction(
+	template<typename T>
+	auto RBA_bond_basis<T>::fraction(
 		const std::chrono::year_month_day& start,
 		const std::chrono::year_month_day& end
-	) const noexcept
+	) const noexcept -> T
 	{
 		return 1; // mock up for now
 	}

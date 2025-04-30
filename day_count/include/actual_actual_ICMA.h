@@ -28,6 +28,7 @@
 namespace day_count
 {
 
+	template<typename T = double>
 	class actual_actual_ICMA
 	{
 
@@ -36,25 +37,23 @@ namespace day_count
 		auto fraction(
 			const std::chrono::year_month_day& start,
 			const std::chrono::year_month_day& end
-		) const noexcept;
+		) const noexcept -> T;
 
 	};
 
 
 	// mock it up for now
-	using _365s = std::chrono::duration<int, std::ratio_divide<std::chrono::years::period, std::ratio<365>>>;
-	using _366s = std::chrono::duration<int, std::ratio_divide<std::chrono::years::period, std::ratio<366>>>;
-
-	inline auto actual_actual_ICMA::fraction(
+	template<typename T>
+	auto actual_actual_ICMA<T>::fraction(
 		const std::chrono::year_month_day& start,
 		const std::chrono::year_month_day& end
-	) const noexcept
+	) const noexcept -> T
 	{
 		const auto start_date = std::chrono::sys_days{ start };
 		const auto end_date = std::chrono::sys_days{ end };
-		const auto days_between = (end_date - start_date).count();
+		const auto days_between = static_cast<T>((end_date - start_date).count());
 
-		return _365s{ days_between } + _366s{ days_between };
+		return days_between / 365;
 	}
 
 }
