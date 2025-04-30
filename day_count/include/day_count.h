@@ -63,12 +63,12 @@ namespace day_count
 		const day_count<double>& dc
 	) -> double
 	{
-		const auto df = std::visit(
+		const auto yf = std::visit(
 			[&](const auto& dc) { return dc.fraction(start, end); },
 			dc
 		);
 
-		return df;
+		return yf;
 	}
 
 }
