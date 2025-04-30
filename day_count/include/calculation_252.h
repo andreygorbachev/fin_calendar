@@ -48,13 +48,13 @@ namespace day_count
 
 	private:
 
-		gregorian::calendar _cal;
+		gregorian::calendar cal_;
 
 	};
 
 
 	inline calculation_252::calculation_252(gregorian::calendar cal) :
-		_cal{ std::move(cal) }
+		cal_{ std::move(cal) }
 	{
 	}
 
@@ -70,7 +70,7 @@ namespace day_count
 			start,
 			std::chrono::sys_days{ end } - std::chrono::days{ 1 } // exclude the end date
 		}; // this will only work for end after start at the moment
-		const auto days_between = _cal.count_business_days(start_end);
+		const auto days_between = cal_.count_business_days(start_end);
 
 		return _252s{ days_between };
 	}
