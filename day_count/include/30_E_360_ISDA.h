@@ -81,9 +81,9 @@ namespace day_count
 			end_day = std::chrono::day{ 30 };
 
 		const auto days_between = static_cast<T>(
-			(end_year - start_year).count() * 360 +
-			(end_month - start_month).count() * 30 +
-			(end_day - start_day).count()
+			(static_cast<int>(end_year) - static_cast<int>(start_year)) * 360 +
+			(static_cast<unsigned>(end_month) - static_cast<unsigned>(start_month)) * 30 +
+			(static_cast<unsigned>(end_day) - static_cast<unsigned>(start_day))
 		);
 
 		return days_between / 360;
