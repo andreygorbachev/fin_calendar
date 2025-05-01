@@ -37,7 +37,7 @@ namespace day_count
 
 	TEST(day_count, fraction1)
 	{
-		auto dc = day_count{};
+		auto dc = day_count<double>{}; // not sure why default template argument would not work here
 
 		dc = one_1{};
 		EXPECT_EQ(1.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
