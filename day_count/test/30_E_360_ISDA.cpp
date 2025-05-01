@@ -35,7 +35,7 @@ namespace day_count
 
 	TEST(thirty_E_360_ISDA, fraction1)
 	{
-		const auto dc = thirty_E_360_ISDA{};
+		const auto dc = thirty_E_360_ISDA{ 2025y / April / 25d };
 
 //		EXPECT_EQ(1.0 / 360.0, dc.fraction(2025y / April / 24d, 2025y / April / 25d));
 //		EXPECT_EQ(365.0 / 360.0, dc.fraction(2024y / April / 25d, 2025y / April / 25d));

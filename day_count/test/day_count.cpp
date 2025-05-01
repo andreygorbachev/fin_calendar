@@ -60,7 +60,7 @@ namespace day_count
 		dc = thirty_E_360{};
 		EXPECT_EQ(1.0 / 360.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
 
-		dc = thirty_E_360_ISDA{};
+		dc = thirty_E_360_ISDA{ 2025y / April / 25d };
 		EXPECT_EQ(1.0 / 360.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
 
 		dc = actual_365_L{};

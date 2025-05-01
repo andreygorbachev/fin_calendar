@@ -23,6 +23,7 @@
 #pragma once
 
 #include <chrono>
+#include <utility>
 
 
 namespace day_count
@@ -34,12 +35,27 @@ namespace day_count
 
 	public:
 
+		explicit thirty_E_360_ISDA(std::chrono::year_month_day termination);
+
+	public:
+
 		auto fraction(
 			const std::chrono::year_month_day& start,
 			const std::chrono::year_month_day& end
 		) const noexcept -> T;
 
+	private:
+
+		std::chrono::year_month_day termination_;
+
 	};
+
+
+	template<typename T>
+	thirty_E_360_ISDA<T>::thirty_E_360_ISDA(std::chrono::year_month_day termination) :
+		termination_{ std::move(termination) }
+	{
+	}
 
 
 	template<typename T>
@@ -58,9 +74,8 @@ namespace day_count
 		if (start == start.year() / start.month() / std::chrono::last)
 			start_day = std::chrono::day{ 30 };
 		if (end == end.year() / end.month() / std::chrono::last)
-			end_day = std::chrono::day{ 30 };
-
-		// termination date should also be part of the calculation
+			if(!(end.month() == std::chrono::February && end != termination_))
+				end_day = std::chrono::day{ 30 };
 
 		const auto days_between = static_cast<T>(
 			(end_year - start_year).count() * 360 +
