@@ -74,7 +74,7 @@ namespace day_count
 		if (start == start.year() / start.month() / std::chrono::last)
 			start_day = std::chrono::day{ 30 };
 		if (end == end.year() / end.month() / std::chrono::last)
-			if(!(end.month() == std::chrono::February && end != termination_))
+			if(!(end.month() == std::chrono::February && end == termination_))
 				end_day = std::chrono::day{ 30 };
 
 		const auto days_between = static_cast<T>(
