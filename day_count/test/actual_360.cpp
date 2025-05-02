@@ -35,11 +35,32 @@ namespace day_count
 
 	TEST(actual_360, fraction1)
 	{
+		// from ISDA's 30-360-2006ISDADefs.xls
+
 		const auto dc = actual_360{};
 
-//		EXPECT_EQ(1.0 / 360.0, dc.fraction(2025y / April / 24d, 2025y / April / 25d));
-//		EXPECT_EQ(365.0 / 360.0, dc.fraction(2024y / April / 25d, 2025y / April / 25d));
-//		EXPECT_EQ(366.0 / 360.0, dc.fraction(2023y / April / 25d, 2024y / April / 25d));
+		EXPECT_NEAR(0.0417, dc.fraction(2007y / January / 15d,   2007y / January / 30d),   0.0001);
+		EXPECT_NEAR(0.0861, dc.fraction(2007y / January / 15d,   2007y / February / 15d),  0.0001);
+		EXPECT_NEAR(0.5028, dc.fraction(2007y / January / 15d,   2007y / July / 15d),      0.0001);
+		EXPECT_NEAR(0.5083, dc.fraction(2007y / September / 30d, 2008y / March / 31d),     0.0001);
+		EXPECT_NEAR(0.0861, dc.fraction(2007y / September / 30d, 2007y / October / 31d),   0.0001);
+		EXPECT_NEAR(1.0167, dc.fraction(2007y / September / 30d, 2008y / September / 30d), 0.0001);
+		EXPECT_NEAR(0.0444, dc.fraction(2007y / January / 15d,   2007y / January / 31d),   0.0001);
+		EXPECT_NEAR(0.0778, dc.fraction(2007y / January / 31d,   2007y / February / 28d),  0.0001);
+		EXPECT_NEAR(0.0861, dc.fraction(2007y / February / 28d,  2007y / March / 31d),     0.0001);
+		EXPECT_NEAR(0.5028, dc.fraction(2006y / August / 31d,    2007y / February / 28d),  0.0001);
+		EXPECT_NEAR(0.5111, dc.fraction(2007y / February / 28d,  2007y / August / 31d),    0.0001);
+		EXPECT_NEAR(0.0389, dc.fraction(2007y / February / 14d,  2007y / February / 28d),  0.0001);
+		EXPECT_NEAR(1.0222, dc.fraction(2007y / February / 26d,  2008y / February / 29d),  0.0001);
+		EXPECT_NEAR(1.0139, dc.fraction(2008y / February / 29d,  2009y / February / 28d),  0.0001);
+		EXPECT_NEAR(0.0833, dc.fraction(2008y / February / 29d,  2008y / March / 30d),     0.0001);
+		EXPECT_NEAR(0.0861, dc.fraction(2008y / February / 29d,  2008y / March / 31d),     0.0001);
+		EXPECT_NEAR(0.0139, dc.fraction(2007y / February / 28d,  2007y / March / 5d),      0.0001);
+		EXPECT_NEAR(0.0778, dc.fraction(2007y / October / 31d,   2007y / November / 28d),  0.0001);
+		EXPECT_NEAR(0.5056, dc.fraction(2007y / August / 31d,    2008y / February / 29d),  0.0001);
+		EXPECT_NEAR(0.5111, dc.fraction(2008y / February / 29d,  2008y / August / 31d),    0.0001);
+		EXPECT_NEAR(0.5028, dc.fraction(2008y / August / 31d,    2009y / February / 28d),  0.0001);
+		EXPECT_NEAR(0.5111, dc.fraction(2009y / February / 28d,  2009y / August / 31d),    0.0001);
 	}
 
 }
