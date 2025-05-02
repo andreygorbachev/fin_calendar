@@ -28,6 +28,7 @@ add_subdirectory(business_day_convention)
 add_subdirectory(frequency)
 add_subdirectory(quasi_coupon_dates)
 add_subdirectory(day_count)
+add_subdirectory(cash_flow)
 
 #set(CMAKE_EXPORT_PACKAGE_REGISTRY ON)
 #export(PACKAGE FinCalendar)
