@@ -33,8 +33,12 @@ using namespace std::chrono;
 namespace cash_flow
 {
 
-	TEST(cash_flow, Test1)
+	TEST(cash_flow, Constructor1)
 	{
+		const auto cf = cash_flow{ 2025y / May / 3d, 100.0 };
+
+		EXPECT_EQ(2025y / May / 3d, cf.get_date());
+		EXPECT_EQ(100.0, cf.get_flow());
 	}
 
 }

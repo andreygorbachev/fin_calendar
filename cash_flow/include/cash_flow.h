@@ -28,4 +28,45 @@
 namespace cash_flow
 {
 
+	template<typename T = double>
+	class cash_flow
+	{
+
+	public:
+
+		explicit cash_flow(std::chrono::year_month_day date, T flow) noexcept;
+
+	public:
+
+		auto get_date() const noexcept -> const std::chrono::year_month_day&;
+		auto get_flow() const noexcept -> const T&;
+
+	private:
+
+		std::chrono::year_month_day date_{};
+		T flow_{};
+
+	};
+
+
+	template<typename T>
+	cash_flow<T>::cash_flow(std::chrono::year_month_day date, T flow) noexcept :
+		date_{ date },
+		flow_{ flow }
+	{
+	}
+
+
+	template<typename T>
+	auto cash_flow<T>::get_date() const noexcept -> const std::chrono::year_month_day&
+	{
+		return date_;
+	}
+
+	template<typename T>
+	auto cash_flow<T>::get_flow() const noexcept -> const T&
+	{
+		return flow_;
+	}
+
 }
