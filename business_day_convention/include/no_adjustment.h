@@ -31,7 +31,7 @@
 namespace business_day_convention
 {
 
-	class no_adjustment
+	class no_adjustment final
 	{
 
 	public:

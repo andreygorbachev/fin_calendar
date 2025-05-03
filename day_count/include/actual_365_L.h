@@ -29,7 +29,7 @@ namespace day_count
 {
 
 	template<typename T = double>
-	class actual_365_L // actually in ISDA 2021 it is only defined as Act/365L
+	class actual_365_L final // actually in ISDA 2021 it is only defined as Act/365L
 	{
 
 	public:

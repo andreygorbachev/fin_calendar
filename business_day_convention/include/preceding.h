@@ -31,7 +31,7 @@
 namespace business_day_convention
 {
 
-	class preceding
+	class preceding final
 	{
 
 	public:

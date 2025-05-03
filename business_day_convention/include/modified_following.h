@@ -31,7 +31,7 @@
 namespace business_day_convention
 {
 
-	class modified_following
+	class modified_following final
 	{
 
 	public:

@@ -32,7 +32,7 @@ namespace day_count
 {
 
 	template<typename T = double>
-	class actual_actual // should we call it actual_actual_ISDA?
+	class actual_actual final // should we call it actual_actual_ISDA?
 	{
 
 	public:

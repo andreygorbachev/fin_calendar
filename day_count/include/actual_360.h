@@ -29,7 +29,7 @@ namespace day_count
 {
 
 	template<typename T = double>
-	class actual_360
+	class actual_360 final
 	{
 
 	public:

@@ -29,7 +29,7 @@ namespace day_count
 {
 
 	template<typename T = double>
-	class RBA_bond_basis
+	class RBA_bond_basis final
 	{
 
 	public:

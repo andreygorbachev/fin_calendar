@@ -30,7 +30,7 @@ namespace day_count
 {
 
 	template<typename T = double>
-	class thirty_E_360_ISDA
+	class thirty_E_360_ISDA final
 	{
 
 	public:

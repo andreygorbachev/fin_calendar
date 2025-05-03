@@ -29,7 +29,7 @@ namespace day_count
 {
 
 	template<typename T = double>
-	class actual_actual_ICMA
+	class actual_actual_ICMA final
 	{
 
 	public:

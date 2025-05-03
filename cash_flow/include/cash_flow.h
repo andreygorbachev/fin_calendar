@@ -30,7 +30,7 @@ namespace cash_flow
 {
 
 	template<typename T = double>
-	class cash_flow
+	class cash_flow final
 	{
 
 	public:
