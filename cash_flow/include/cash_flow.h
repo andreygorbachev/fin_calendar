@@ -43,7 +43,7 @@ namespace cash_flow
 
 	private:
 
-		std::chrono::year_month_day date_{};
+		std::chrono::year_month_day date_{}; // should we do anything here to make sure this is a good payment date?
 		T flow_{};
 
 	};
