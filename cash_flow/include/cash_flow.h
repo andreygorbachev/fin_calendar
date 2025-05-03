@@ -23,6 +23,7 @@
 #pragma once
 
 #include <chrono>
+#include <utility>
 
 
 namespace cash_flow
@@ -51,8 +52,8 @@ namespace cash_flow
 
 	template<typename T>
 	cash_flow<T>::cash_flow(std::chrono::year_month_day date, T flow) noexcept :
-		date_{ date },
-		flow_{ flow }
+		date_{ std::move(date) },
+		flow_{ std::move(flow) }
 	{
 	}
 
