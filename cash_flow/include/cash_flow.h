@@ -36,6 +36,8 @@ namespace cash_flow
 	public:
 
 		explicit cash_flow(std::chrono::year_month_day date, T flow) noexcept;
+		// we can also add currency here (to allow securities to make payments in more than one currency)
+		// if currency has a calendar associated with it we can also check that we have a good payment date here
 
 	public:
 
@@ -44,7 +46,7 @@ namespace cash_flow
 
 	private:
 
-		std::chrono::year_month_day date_{}; // should we do anything here to make sure this is a good payment date?
+		std::chrono::year_month_day date_{};
 		T flow_{};
 
 	};
