@@ -37,8 +37,8 @@ namespace cash_flow
 	{
 		const auto cf = cash_flow{ 2025y / May / 3d, 100.0 };
 
-		EXPECT_EQ(2025y / May / 3d, cf.get_date());
-		EXPECT_EQ(100.0, cf.get_flow());
+		EXPECT_EQ(2025y / May / 3d, cf.get_payment_date());
+		EXPECT_EQ(100.0, cf.get_amount());
 	}
 
 }

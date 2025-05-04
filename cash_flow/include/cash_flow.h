@@ -35,41 +35,41 @@ namespace cash_flow
 
 	public:
 
-		explicit cash_flow(std::chrono::year_month_day date, T flow) noexcept;
+		explicit cash_flow(std::chrono::year_month_day payment_date, T amount) noexcept;
 		// we can also add currency here (to allow securities to make payments in more than one currency)
 		// if currency has a calendar associated with it we can also check that we have a good payment date here
 
 	public:
 
-		auto get_date() const noexcept -> const std::chrono::year_month_day&;
-		auto get_flow() const noexcept -> const T&;
+		auto get_payment_date() const noexcept -> const std::chrono::year_month_day&;
+		auto get_amount() const noexcept -> const T&;
 
 	private:
 
-		std::chrono::year_month_day date_{};
-		T flow_{};
+		std::chrono::year_month_day payment_date_{};
+		T amount_{};
 
 	};
 
 
 	template<typename T>
-	cash_flow<T>::cash_flow(std::chrono::year_month_day date, T flow) noexcept :
-		date_{ std::move(date) },
-		flow_{ std::move(flow) }
+	cash_flow<T>::cash_flow(std::chrono::year_month_day payment_date, T amount) noexcept :
+		payment_date_{ std::move(payment_date) },
+		amount_{ std::move(amount) }
 	{
 	}
 
 
 	template<typename T>
-	auto cash_flow<T>::get_date() const noexcept -> const std::chrono::year_month_day&
+	auto cash_flow<T>::get_payment_date() const noexcept -> const std::chrono::year_month_day&
 	{
-		return date_;
+		return payment_date_;
 	}
 
 	template<typename T>
-	auto cash_flow<T>::get_flow() const noexcept -> const T&
+	auto cash_flow<T>::get_amount() const noexcept -> const T&
 	{
-		return flow_;
+		return amount_;
 	}
 
 }
