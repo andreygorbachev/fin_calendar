@@ -26,7 +26,7 @@
 #include <variant>
 
 
-namespace frequency
+namespace fin_calendar
 {
 
 	using frequency = std::variant<

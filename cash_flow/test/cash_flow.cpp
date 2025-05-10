@@ -30,7 +30,7 @@ using namespace std;
 using namespace std::chrono;
 
 
-namespace cash_flow
+namespace fin_calendar
 {
 
 	TEST(cash_flow, constructor1)

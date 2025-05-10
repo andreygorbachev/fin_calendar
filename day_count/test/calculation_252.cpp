@@ -37,7 +37,7 @@ using namespace std::chrono;
 using namespace gregorian;
 
 
-namespace day_count
+namespace fin_calendar
 {
 
 	TEST(calculation_252, fraction1)

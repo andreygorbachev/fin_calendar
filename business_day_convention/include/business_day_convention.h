@@ -34,7 +34,7 @@
 #include "modified_preceding.h"
 
 
-namespace business_day_convention
+namespace fin_calendar
 {
 
 	using business_day_convention = std::variant<

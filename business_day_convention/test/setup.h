@@ -30,7 +30,7 @@
 #include <business_day_adjusters.h>
 
 
-namespace business_day_convention
+namespace fin_calendar
 {
 
 	inline auto _make_holiday_schedule_england()

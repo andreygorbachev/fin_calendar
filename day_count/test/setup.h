@@ -27,7 +27,7 @@
 #include <calendar.h>
 
 
-namespace day_count
+namespace fin_calendar
 {
 
 	inline auto _make_calendar_ANBIMA()

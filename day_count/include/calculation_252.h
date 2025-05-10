@@ -29,7 +29,7 @@
 #include <period.h>
 
 
-namespace day_count
+namespace fin_calendar
 {
 
 	template<typename T = double>

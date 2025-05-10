@@ -30,7 +30,7 @@ using namespace std;
 using namespace std::chrono;
 
 
-namespace day_count
+namespace fin_calendar
 {
 
 	TEST(actual_360, fraction1)

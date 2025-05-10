@@ -26,7 +26,7 @@
 #include <utility>
 
 
-namespace cash_flow
+namespace fin_calendar
 {
 
 	template<typename T = double>

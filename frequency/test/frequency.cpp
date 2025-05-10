@@ -30,7 +30,7 @@ using namespace std;
 using namespace std::chrono;
 
 
-namespace frequency
+namespace fin_calendar
 {
 
 	TEST(frequency, SemiAnnual1)

@@ -25,7 +25,7 @@
 #include <chrono>
 
 
-namespace quasi_coupon_dates
+namespace fin_calendar
 {
 
 }

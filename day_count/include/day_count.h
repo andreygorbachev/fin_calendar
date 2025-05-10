@@ -38,7 +38,7 @@
 #include "RBA_bond_basis.h"
 
 
-namespace day_count
+namespace fin_calendar
 {
 
 	template<typename T = double>

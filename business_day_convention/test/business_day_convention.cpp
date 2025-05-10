@@ -34,7 +34,7 @@ using namespace std::chrono;
 using namespace gregorian;
 
 
-namespace business_day_convention
+namespace fin_calendar
 {
 
 	TEST(business_day_convention, make_business_day1)
