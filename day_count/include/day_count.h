@@ -57,11 +57,12 @@ namespace fin_calendar
 	>;
 
 
-	inline auto fraction(
+	template<typename T = double>
+	auto fraction(
 		const std::chrono::year_month_day& start,
 		const std::chrono::year_month_day& end,
-		const day_count<double>& dc
-	) -> double
+		const day_count<T>& dc
+	) -> T
 	{
 		const auto yf = std::visit(
 			[&](const auto& dc) { return dc.fraction(start, end); },

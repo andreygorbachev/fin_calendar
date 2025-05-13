@@ -37,7 +37,7 @@ namespace fin_calendar
 
 	TEST(day_count, fraction1)
 	{
-		auto dc = day_count<double>{}; // not sure why default template argument would not work here
+		auto dc = day_count<>{};
 
 		dc = one_1{};
 		EXPECT_EQ(1.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
@@ -72,5 +72,43 @@ namespace fin_calendar
 		dc = RBA_bond_basis{};
 		EXPECT_EQ(1.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
 	}
+
+/*	TEST(day_count, fraction2)
+	{
+		auto dc = day_count<cpp_dec_float_50>{};
+
+		dc = one_1{};
+		EXPECT_EQ(1.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
+
+		dc = actual_actual{};
+		EXPECT_EQ(1.0 / 365.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
+
+		dc = actual_actual_ICMA{};
+		EXPECT_EQ(1.0 / 365.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
+
+		dc = actual_365_fixed{};
+		EXPECT_EQ(1.0 / 365.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
+
+		dc = actual_360{};
+		EXPECT_EQ(1.0 / 360.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
+
+		dc = thirty_360{};
+		EXPECT_EQ(1.0 / 360.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
+
+		dc = thirty_E_360{};
+		EXPECT_EQ(1.0 / 360.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
+
+		dc = thirty_E_360_ISDA{ 2025y / April / 25d };
+		EXPECT_EQ(1.0 / 360.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
+
+		dc = actual_365_L{};
+		EXPECT_EQ(1.0 / 365.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
+
+		dc = calculation_252{ make_calendar_ANBIMA() };
+		EXPECT_EQ(1.0 / 252.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
+
+		dc = RBA_bond_basis{};
+		EXPECT_EQ(1.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
+	}*/
 
 }
