@@ -32,14 +32,23 @@ using namespace std::chrono;
 
 namespace fin_calendar
 {
+	// from "CANADIAN CONVENTIONS IN FIXED INCOME MARKETS"
 
 	TEST(actual_365_fixed, fraction1)
 	{
 		const auto dc = actual_365_fixed{};
 
-//		EXPECT_EQ(1.0 / 365.0, dc.fraction(2025y / April / 24d, 2025y / April / 25d));
-//		EXPECT_EQ(365.0 / 365.0, dc.fraction(2024y / April / 25d, 2025y / April / 25d));
-//		EXPECT_EQ(366.0 / 365.0, dc.fraction(2023y / April / 25d, 2024y / April / 25d));
+		EXPECT_NEAR(0.284931506849315, dc.fraction(2005y / December / 1d, 2006y / March / 15d), 1.0e-15);
+	}
+
+	TEST(actual_365_fixed, fraction2)
+	{
+		const auto dc = actual_365_fixed{};
+
+		EXPECT_EQ(0.0, dc.fraction(2025y / May / 13d, 2025y / May / 13d));
+		// add more tests:
+		// end date before start date
+		// more?
 	}
 
 }
