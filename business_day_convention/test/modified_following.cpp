@@ -100,7 +100,7 @@ namespace fin_calendar
 
 		const auto& c = make_calendar_all_holidays();
 
-		EXPECT_THROW(bdc.adjust(c.get_schedule().get_from_until().get_until(), c), out_of_range);
+		EXPECT_THROW(bdc.adjust(c.get_schedule().get_period().get_until(), c), out_of_range);
 	}
 
 }
