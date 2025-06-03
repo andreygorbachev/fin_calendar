@@ -189,8 +189,8 @@ namespace fin_calendar
 		using namespace gregorian;
 		using namespace gregorian::util;
 
-		auto s = schedule{ days_period{
-			2024y / FirstDayOfJanuary, 2024y / LastDayOfDecember },
+		auto s = schedule{ 
+			days_period{ 2024y / FirstDayOfJanuary, 2024y / LastDayOfDecember },
 			schedule::dates{}
 		};
 		return calendar{ NoWeekend, ~s };
