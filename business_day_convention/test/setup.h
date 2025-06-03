@@ -24,6 +24,8 @@
 
 #include <utility>
 
+#include <period.h>
+
 #include <schedule.h>
 #include <annual_holidays.h>
 #include <calendar.h>
@@ -37,6 +39,7 @@ namespace fin_calendar
 	{
 		using namespace std::chrono;
 		using namespace gregorian;
+		using namespace gregorian::util;
 
 		auto holidays = schedule::dates{
 			year{ 2018 } / January / day{ 1u },
@@ -114,6 +117,7 @@ namespace fin_calendar
 	{
 		using namespace std::chrono;
 		using namespace gregorian;
+		using namespace gregorian::util;
 
 		const auto known_part = _make_holiday_schedule_england();
 
@@ -163,6 +167,7 @@ namespace fin_calendar
 	{
 		using namespace std::chrono;
 		using namespace gregorian;
+		using namespace gregorian::util;
 
 		auto hols = schedule::dates{
 			2024y / FirstDayOfJanuary,
@@ -182,6 +187,7 @@ namespace fin_calendar
 	{
 		using namespace std::chrono;
 		using namespace gregorian;
+		using namespace gregorian::util;
 
 		auto s = schedule{ days_period{
 			2024y / FirstDayOfJanuary, 2024y / LastDayOfDecember },

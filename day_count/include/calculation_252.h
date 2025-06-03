@@ -25,8 +25,9 @@
 #include <chrono>
 #include <utility>
 
-#include <calendar.h>
 #include <period.h>
+
+#include <calendar.h>
 
 
 namespace fin_calendar
@@ -67,7 +68,7 @@ namespace fin_calendar
 		const std::chrono::year_month_day& end
 	) const -> T
 	{
-		const auto start_end = gregorian::days_period{
+		const auto start_end = gregorian::util::days_period{
 			start,
 			std::chrono::sys_days{ end } - std::chrono::days{ 1 } // exclude the end date
 		}; // this will only work for end after start at the moment
