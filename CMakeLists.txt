@@ -6,9 +6,9 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED On)
 set(CMAKE_CXX_EXTENSIONS Off)
 
-set(GREGORIAN_CALENDAR_MINIMAL TRUE)
-
 include(FetchContent)
+
+set(GREGORIAN_CALENDAR_MINIMAL On)
 
 FetchContent_Declare(
   calendar
@@ -16,6 +16,8 @@ FetchContent_Declare(
   GIT_TAG        main
 )
 FetchContent_MakeAvailable(calendar)
+
+set(BUILD_GMOCK Off)
 
 FetchContent_Declare(
   googletest
