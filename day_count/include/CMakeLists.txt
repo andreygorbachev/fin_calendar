@@ -17,4 +17,4 @@ add_library(${PROJECT_NAME} INTERFACE
 
 target_include_directories(${PROJECT_NAME} INTERFACE .)
 
-export(TARGETS day-count NAMESPACE DayCount:: FILE DayCountConfig.cmake)
+#export(TARGETS day-count NAMESPACE DayCount:: FILE DayCountConfig.cmake)

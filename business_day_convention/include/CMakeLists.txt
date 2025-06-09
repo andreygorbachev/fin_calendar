@@ -11,4 +11,4 @@ add_library(${PROJECT_NAME} INTERFACE
 
 target_include_directories(${PROJECT_NAME} INTERFACE .)
 
-export(TARGETS business-day-convention NAMESPACE BusinessDayConvention:: FILE BusinessDayConventionConfig.cmake)
+#export(TARGETS business-day-convention NAMESPACE BusinessDayConvention:: FILE BusinessDayConventionConfig.cmake)

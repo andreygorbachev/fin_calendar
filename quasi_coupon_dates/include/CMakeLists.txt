@@ -6,4 +6,4 @@ add_library(${PROJECT_NAME} INTERFACE
 
 target_include_directories(${PROJECT_NAME} INTERFACE .)
 
-export(TARGETS quasi-coupon-dates NAMESPACE QuasiCouponDates:: FILE QuasiCouponDatesConfig.cmake)
+#export(TARGETS quasi-coupon-dates NAMESPACE QuasiCouponDates:: FILE QuasiCouponDatesConfig.cmake)

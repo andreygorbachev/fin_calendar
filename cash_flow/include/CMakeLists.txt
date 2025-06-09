@@ -6,4 +6,4 @@ add_library(${PROJECT_NAME} INTERFACE
 
 target_include_directories(${PROJECT_NAME} INTERFACE .)
 
-export(TARGETS cash-flow NAMESPACE CashFlow:: FILE CashFlowConfig.cmake)
+#export(TARGETS cash-flow NAMESPACE CashFlow:: FILE CashFlowConfig.cmake)
