@@ -1,4 +1,4 @@
-project("cash-flow")
+project("cash-flow" LANGUAGES CXX)
 
 add_library(${PROJECT_NAME} INTERFACE
   cash_flow.h

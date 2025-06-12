@@ -1,4 +1,4 @@
-project(day-count-test)
+project("day-count-test" LANGUAGES CXX)
 
 add_executable(${PROJECT_NAME}
   1_1.cpp

@@ -1,4 +1,4 @@
-project(frequency-test)
+project("frequency-test" LANGUAGES CXX)
 
 add_executable(${PROJECT_NAME}
   frequency.cpp

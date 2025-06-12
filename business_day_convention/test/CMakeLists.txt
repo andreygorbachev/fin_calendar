@@ -1,4 +1,4 @@
-project(business-day-convention-test)
+project("business-day-convention-test" LANGUAGES CXX)
 
 add_executable(${PROJECT_NAME}
   no_adjustment.cpp

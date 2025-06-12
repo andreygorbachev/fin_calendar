@@ -1,4 +1,4 @@
-project(quasi-coupon-dates-test)
+project("quasi-coupon-dates-test" LANGUAGES CXX)
 
 add_executable(${PROJECT_NAME}
   quasi_coupon_dates.cpp

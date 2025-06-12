@@ -1,4 +1,4 @@
-project("day-count")
+project("day-count" LANGUAGES CXX)
 
 add_library(${PROJECT_NAME} INTERFACE
   1_1.h

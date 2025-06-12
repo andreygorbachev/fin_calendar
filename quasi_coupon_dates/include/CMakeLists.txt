@@ -1,4 +1,4 @@
-project("quasi-coupon-dates")
+project("quasi-coupon-dates" LANGUAGES CXX)
 
 add_library(${PROJECT_NAME} INTERFACE
   quasi_coupon_dates.h

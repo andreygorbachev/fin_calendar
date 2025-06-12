@@ -1,4 +1,4 @@
-project(cash-flow-test)
+project("cash-flow-test" LANGUAGES CXX)
 
 add_executable(${PROJECT_NAME}
   cash_flow.cpp

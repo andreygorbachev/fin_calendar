@@ -1,4 +1,4 @@
-project("frequency")
+project("frequency" LANGUAGES CXX)
 
 add_library(${PROJECT_NAME} INTERFACE
   frequency.h
