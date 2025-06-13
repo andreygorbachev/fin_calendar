@@ -26,6 +26,8 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googletest)
 
+enable_testing()
+
 add_subdirectory(business_day_convention)
 add_subdirectory(frequency)
 add_subdirectory(quasi_coupon_dates)
