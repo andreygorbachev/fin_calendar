@@ -1,4 +1,4 @@
-project("day-count-test" LANGUAGES CXX)
+project("${PROJECT_NAME}_test" LANGUAGES CXX)
 
 add_executable(${PROJECT_NAME}
   1_1.cpp
@@ -17,7 +17,7 @@ add_executable(${PROJECT_NAME}
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
-  day-count
+  fin-calendar_day-count
   calendar
   GTest::gtest_main
 )

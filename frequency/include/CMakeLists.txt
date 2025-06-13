@@ -1,4 +1,4 @@
-project("frequency" LANGUAGES CXX)
+# project "fin-calendar_frequency"
 
 add_library(${PROJECT_NAME} INTERFACE
   frequency.h

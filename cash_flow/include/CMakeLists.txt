@@ -1,4 +1,4 @@
-project("cash-flow" LANGUAGES CXX)
+# project "fin-calendar_cash-flow"
 
 add_library(${PROJECT_NAME} INTERFACE
   cash_flow.h

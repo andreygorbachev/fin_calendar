@@ -1,4 +1,4 @@
-project("business-day-convention-test" LANGUAGES CXX)
+project("${PROJECT_NAME}_test" LANGUAGES CXX)
 
 add_executable(${PROJECT_NAME}
   no_adjustment.cpp
@@ -11,7 +11,7 @@ add_executable(${PROJECT_NAME}
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
-  business-day-convention
+  fin-calendar_business-day-convention
   calendar
   GTest::gtest_main
 )

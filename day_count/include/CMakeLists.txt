@@ -1,4 +1,4 @@
-project("day-count" LANGUAGES CXX)
+# project "fin-calendar_day-count"
 
 add_library(${PROJECT_NAME} INTERFACE
   1_1.h

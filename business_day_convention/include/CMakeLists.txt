@@ -1,4 +1,4 @@
-project("business-day-convention" LANGUAGES CXX)
+# project "fin-calendar_business-day-convention"
 
 add_library(${PROJECT_NAME} INTERFACE
   no_adjustment.h

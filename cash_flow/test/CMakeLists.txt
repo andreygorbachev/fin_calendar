@@ -1,11 +1,11 @@
-project("cash-flow-test" LANGUAGES CXX)
+project("${PROJECT_NAME}_test" LANGUAGES CXX)
 
 add_executable(${PROJECT_NAME}
   cash_flow.cpp
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
-  cash-flow
+  fin-calendar_cash-flow
   GTest::gtest_main
 )
 

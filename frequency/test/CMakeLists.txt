@@ -1,11 +1,11 @@
-project("frequency-test" LANGUAGES CXX)
+project("${PROJECT_NAME}_test" LANGUAGES CXX)
 
 add_executable(${PROJECT_NAME}
   frequency.cpp
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
-  frequency
+  fin-calendar_frequency
   GTest::gtest_main
 )
 
