@@ -8,7 +8,7 @@ set(CMAKE_CXX_EXTENSIONS Off)
 
 include(FetchContent)
 
-set(GREGORIAN_CALENDAR_MINIMAL On)
+set(CALENDAR_BUILD_TESTS_AND_EXAMPLES Off)
 
 FetchContent_Declare(
   calendar
@@ -26,7 +26,13 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googletest)
 
-enable_testing()
+option(FIN-CALENDAR_BUILD_TESTS_AND_EXAMPLES "Build all of fin-calendar's own tests and examples." On)
+
+if(${FIN-CALENDAR_BUILD_TESTS_AND_EXAMPLES})
+
+  enable_testing()
+
+endif()
 
 add_subdirectory(business_day_convention)
 add_subdirectory(frequency)
