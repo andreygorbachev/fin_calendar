@@ -15,20 +15,22 @@ FetchContent_Declare(
   GIT_REPOSITORY https://github.com/andreygorbachev/calendar.git
   GIT_TAG        main
 )
+
 FetchContent_MakeAvailable(calendar)
-
-set(BUILD_GMOCK Off)
-
-FetchContent_Declare(
-  googletest
-  GIT_REPOSITORY https://github.com/google/googletest.git
-  GIT_TAG        v1.17.0
-)
-FetchContent_MakeAvailable(googletest)
 
 option(FIN-CALENDAR_BUILD_TESTS_AND_EXAMPLES "Build all of fin-calendar's own tests and examples." On)
 
 if(${FIN-CALENDAR_BUILD_TESTS_AND_EXAMPLES})
+
+  set(BUILD_GMOCK Off)
+
+  FetchContent_Declare(
+    googletest
+    GIT_REPOSITORY https://github.com/google/googletest.git
+    GIT_TAG        v1.17.0
+  )
+
+  FetchContent_MakeAvailable(googletest)
 
   enable_testing()
 
