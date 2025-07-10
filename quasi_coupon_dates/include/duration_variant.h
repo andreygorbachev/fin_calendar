@@ -26,7 +26,7 @@
 #include <chrono>
 
 
-namespace coupon_schedule
+namespace fin_calendar
 {
 
     using duration_variant = std::variant<

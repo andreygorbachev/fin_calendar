@@ -36,7 +36,7 @@ using namespace std;
 using namespace std::chrono;
 
 
-namespace coupon_schedule
+namespace fin_calendar
 {
 
 	TEST(quasi_coupon_schedule, make_quasi_coupon_schedule_1)

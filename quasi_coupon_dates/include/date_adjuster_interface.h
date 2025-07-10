@@ -27,7 +27,7 @@
 #include <chrono>
 
 
-namespace coupon_schedule
+namespace fin_calendar
 {
 
 	class date_adjuster // very similar to business_day_convention - possibly bring them together? (business_day_convention derived from date_adjuster?)

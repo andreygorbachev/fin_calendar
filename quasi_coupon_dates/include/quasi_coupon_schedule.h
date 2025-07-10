@@ -39,7 +39,7 @@
 #include <stdexcept>
 
 
-namespace coupon_schedule
+namespace fin_calendar
 {
 
 	// where should we consider schedules running on month end?

@@ -27,7 +27,7 @@
 #include <chrono>
 
 
-namespace coupon_schedule
+namespace fin_calendar
 {
 
 	class not_after_quasi_coupon_date final : public date_adjuster // correct name?

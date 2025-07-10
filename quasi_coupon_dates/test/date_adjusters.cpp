@@ -29,7 +29,7 @@
 using namespace std::chrono;
 
 
-namespace coupon_schedule
+namespace fin_calendar
 {
 
 	TEST(not_after_quasi_coupon_date, adjust) // I wonder if we have "<=" "<" and ">=" ">" here in some sense

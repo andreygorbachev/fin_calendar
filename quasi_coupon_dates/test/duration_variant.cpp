@@ -29,7 +29,7 @@
 using namespace std::chrono;
 
 
-namespace coupon_schedule
+namespace fin_calendar
 {
 
 	TEST(duration_variant, advance)
