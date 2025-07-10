@@ -1,11 +1,15 @@
 project("${PROJECT_NAME}_test" LANGUAGES CXX)
 
 add_executable(${PROJECT_NAME}
+  date_adjusters.cpp
+  duration_variant.cpp
+  quasi_coupon_schedule.cpp
   quasi_coupon_dates.cpp
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
   fin-calendar_quasi-coupon-dates
+  calendar # should this be via the tested project?
   GTest::gtest_main
 )
 
