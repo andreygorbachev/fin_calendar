@@ -29,6 +29,7 @@
 namespace fin_calendar
 {
 
+	// should probably be merged with frequency
     using duration_variant = std::variant<
         // I assume that business days would be handled elsewhere
         std::chrono::days,
@@ -40,15 +41,15 @@ namespace fin_calendar
 
 
     template<typename... Ts>
-    struct overloaded : Ts... { using Ts::operator()...; };
+    struct overloaded_ : Ts... { using Ts::operator()...; };
 
     template<typename... Ts>
-    overloaded(Ts...) -> overloaded<Ts...>;
+    overloaded_(Ts...) -> overloaded_<Ts...>;
 
 
     inline auto advance(std::chrono::year_month_day ymd, const duration_variant& dv) -> std::chrono::year_month_day
     {
-        std::visit(overloaded{
+        std::visit(overloaded_{
             [&ymd](const std::chrono::days& ds) { ymd = std::chrono::sys_days{ ymd } + ds; },
             [&ymd](const std::chrono::weeks& ws) { ymd = std::chrono::sys_days{ ymd } + ws; },
             [&ymd](const std::chrono::months& ms) { ymd += ms; },
@@ -60,7 +61,7 @@ namespace fin_calendar
 
     inline auto retreat(std::chrono::year_month_day ymd, const duration_variant& dv) -> std::chrono::year_month_day
     {
-        std::visit(overloaded{
+        std::visit(overloaded_{
             [&ymd](const std::chrono::days& ds) { ymd = std::chrono::sys_days{ ymd } - ds; },
             [&ymd](const std::chrono::weeks& ws) { ymd = std::chrono::sys_days{ ymd } - ws; },
             [&ymd](const std::chrono::months& ms) { ymd -= ms; },
@@ -72,7 +73,7 @@ namespace fin_calendar
 
     inline auto is_forward(const duration_variant& dv) -> bool
     {
-        return std::visit(overloaded{
+        return std::visit(overloaded_{
             [](const std::chrono::days& ds) { return ds > std::chrono::days{ 0 }; },
             [](const std::chrono::weeks& ws) { return ws > std::chrono::weeks{ 0 }; },
             [](const std::chrono::months& ms) { return ms > std::chrono::months{ 0 }; },
@@ -82,7 +83,7 @@ namespace fin_calendar
 
     inline auto is_backward(const duration_variant& dv) -> bool
     {
-        return std::visit(overloaded{
+        return std::visit(overloaded_{
             [](const std::chrono::days& ds) { return ds < std::chrono::days{ 0 }; },
             [](const std::chrono::weeks& ws) { return ws < std::chrono::weeks{ 0 }; },
             [](const std::chrono::months& ms) { return ms < std::chrono::months{ 0 }; },
