@@ -42,6 +42,9 @@ namespace coupon_schedule
     template<typename... Ts>
     struct overloaded : Ts... { using Ts::operator()...; };
 
+    template<typename... Ts>
+    overloaded(Ts...) -> overloaded<Ts...>;
+
 
     inline auto advance(std::chrono::year_month_day ymd, const duration_variant& dv) -> std::chrono::year_month_day
     {
