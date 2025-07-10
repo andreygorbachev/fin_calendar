@@ -18,7 +18,6 @@ add_executable(${PROJECT_NAME}
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
   fin-calendar_day-count
-  calendar
   GTest::gtest_main
 )
 

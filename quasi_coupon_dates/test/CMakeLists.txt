@@ -9,7 +9,6 @@ add_executable(${PROJECT_NAME}
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
   fin-calendar_quasi-coupon-dates
-  calendar # should this be via the tested project?
   GTest::gtest_main
 )
 
