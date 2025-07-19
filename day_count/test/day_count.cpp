@@ -37,7 +37,7 @@ namespace fin_calendar
 
 	TEST(day_count, fraction1)
 	{
-		auto dc = day_count<>{};
+		auto dc = day_count<>{}; // how does this work? (do we want it to work?)
 
 		dc = one_1{};
 		EXPECT_EQ(1.0, fraction(2025y / April / 24d, 2025y / April / 25d, dc));
