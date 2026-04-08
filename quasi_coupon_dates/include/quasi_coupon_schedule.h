@@ -37,6 +37,7 @@
 #include <algorithm>
 #include <memory>
 #include <stdexcept>
+#include <utility>
 
 
 namespace fin_calendar
@@ -286,6 +287,7 @@ namespace fin_calendar
 
             // alternatively we can always reverse the negative duration and always advance
             // (we would not be able to do so for all coupon schedules, but would always work for quasi coupon schedules)
+#ifdef _MSC_BUILD
             auto s = is_forward(frequency) ?
                 _make_quasi_coupon_schedule_forward(issue_maturity, frequency, adjusted_anchor) |
                 std::ranges::to<gregorian::schedule::dates>()
@@ -293,6 +295,23 @@ namespace fin_calendar
                 _make_quasi_coupon_schedule_backward(issue_maturity, frequency, adjusted_anchor) |
                 std::ranges::to<gregorian::schedule::dates>(); // do we need to reverse it?
             // can we have "to" directly to gregorian::schedule?
+#else
+            auto s = gregorian::schedule::dates{};
+            if (is_forward(frequency))
+            {
+                const auto _s =_make_quasi_coupon_schedule_forward(issue_maturity, frequency, adjusted_anchor);
+
+                for (const auto& d : _s)
+                    s.insert(d);
+            }
+            else
+            {
+                const auto _s = _make_quasi_coupon_schedule_backward(issue_maturity, frequency, adjusted_anchor); // do we need to reverse it?
+
+                for (const auto& d : _s)
+                    s.insert(d);
+            }
+#endif
 
             assert(!s.empty());
             auto p = gregorian::util::period{ *s.cbegin(), *s.crbegin() };
