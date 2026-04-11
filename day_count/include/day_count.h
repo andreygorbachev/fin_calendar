@@ -25,6 +25,8 @@
 #include <chrono>
 #include <variant>
 
+#include <period.h>
+
 #include "1_1.h"
 #include "actual_actual.h"
 #include "actual_actual_ICMA.h"
@@ -58,7 +60,7 @@ namespace fin_calendar
 
 
 	template<typename T = double>
-	auto fraction(
+	auto fraction( // is it always a year fraction? (and should it be called that?)
 		const std::chrono::year_month_day& start,
 		const std::chrono::year_month_day& end,
 		const day_count<T>& dc
@@ -70,6 +72,15 @@ namespace fin_calendar
 		);
 
 		return yf;
+	}
+
+	template<typename T = double>
+	auto fraction( // is it always a year fraction? (and should it be called that?)
+		const gregorian::util::days_period& period,
+		const day_count<T>& dc
+	) -> T
+	{
+		return fraction(period.get_from(), period.get_until(), dc);
 	}
 
 }
