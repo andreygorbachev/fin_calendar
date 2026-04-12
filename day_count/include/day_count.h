@@ -74,6 +74,7 @@ namespace fin_calendar
 		return yf;
 	}
 
+	// or should we always use period, rather than start/end? (or do we allow negative fractions?)
 	template<typename T = double>
 	auto fraction( // is it always a year fraction? (and should it be called that?)
 		const gregorian::util::days_period& period,
